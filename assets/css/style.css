@@ -90,6 +90,10 @@ body.elementor-editor-active .steps-container .step:first-of-type, body.elemento
     width: 100%;
     outline: none!important;
     transition:box-shadow 0.2s;
+    border: solid;
+    border-width:0;
+    border-color:none;
+    line-height: 1.3em!important;
 }
 
 /* Adicionando box-shadow apenas em eventos de foco e hover */
