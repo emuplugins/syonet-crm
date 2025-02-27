@@ -85,6 +85,9 @@ function edit_event_type_relation_field($term, $taxonomy) {
                         #related_event_types{
                             display: none;
                         }
+                        #wpseo_meta{
+                            display: none!important;
+                        }
                     </style>
 
                 <?php } ?>

@@ -85,6 +85,9 @@ function add_empresa_id_field_to_quick_add() {
                         #empresa-add input {
                             vertical-align: middle!important;
                         }
+                            #wpseo_meta{
+                            display: none!important;
+                        }
                         
                     </style>
             `);
