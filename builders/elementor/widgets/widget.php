@@ -435,7 +435,7 @@ class Syonet_Form_Widget extends Widget_Base {
 				'label' => esc_html__('Cor da Borda', 'textdomain'),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .form-wizard input, {{WRAPPER}} .form-wizard textarea, {{WRAPPER}} .form-wizard select' => 'border-color: {{VALUE}};',
+					'{{WRAPPER}} .form-wizard input, {{WRAPPER}} .form-wizard textarea, {{WRAPPER}} .form-wizard select' => 'border-color: {{VALUE}}!important;',
 				],
 				'default' => '#D9E9F0',
 			]
@@ -673,7 +673,7 @@ class Syonet_Form_Widget extends Widget_Base {
 				'label' => esc_html__( 'Cor da Borda do Botão de Envio', 'textdomain' ),
 				'type' => \Elementor\Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .form-wizard button.syonet-submit-btn' => 'border-color: {{VALUE}};',
+					'{{WRAPPER}} .form-wizard button.syonet-submit-btn' => 'border-color: {{VALUE}}!important;',
 				],
 				'global' => [
 					'default' => Global_Colors::COLOR_PRIMARY,
@@ -688,7 +688,7 @@ class Syonet_Form_Widget extends Widget_Base {
 				'label' => esc_html__( 'Cor da Borda do Botão', 'textdomain' ),
 				'type' => \Elementor\Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .form-wizard button.syonet-next-btn, {{WRAPPER}} .form-wizard button.syonet-prev-btn' => 'border-color: {{VALUE}};',
+					'{{WRAPPER}} .form-wizard button.syonet-next-btn, {{WRAPPER}} .form-wizard button.syonet-prev-btn' => 'border-color: {{VALUE}}!important;',
 				],
 				'global' => [
 					'default' => Global_Colors::COLOR_PRIMARY,
