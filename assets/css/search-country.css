@@ -119,3 +119,11 @@
 .form-wizard .form-group{
     margin-bottom: 0;
 }
+
+.form-wizard .form-group .form-control-syonet {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
