@@ -129,7 +129,7 @@ $contact_preference = get_option('syonet_contact_preference');
                     </select>
                 </div>
                 <div class="form-control-syonet">
-                    <label for="media">Onde está preenchendo:</label>
+                    <label for="media">Onde preenche:</label>
                     <select name="media" id="media">
                         <?php foreach ($media as $media): ?>
                             <option value="<?php echo $media['value']; ?>"><?php echo $media['name']; ?></option>
@@ -179,7 +179,7 @@ $contact_preference = get_option('syonet_contact_preference');
                 <div class="form-group show-address">
                     <div class="form-control-syonet">
                         <label for="address_number">Número</label>
-                        <input type="text" id="address_number" name="address_number" placeholder="123" required />
+                        <input type="text" id="address_number" name="address_number" placeholder="144" required />
                     </div>
                     <div class="form-control-syonet">
                         <label for="state">Estado</label>
