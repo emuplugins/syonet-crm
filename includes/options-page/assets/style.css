@@ -1,0 +1,225 @@
+
+/* MULTI VALUE FIELD */
+
+.syonet-multi-value-field {
+    margin-bottom: 20px;
+}
+
+.syonet-values-container {
+    margin-bottom: 10px;
+}
+
+.syonet-value-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.syonet-value-row input {
+    flex-grow: 1;
+    margin-right: 10px;
+}
+
+.syonet-button-sucess {
+    background-color: #008a49!important;
+    color: #fff!important;
+    border: none!important;
+    cursor: pointer!important;
+}
+
+.syonet-add-value{
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    font-size:1em!important;
+    line-height: 0.8em!important;
+    padding: 0.4em 0.8em!important;
+    display: flex!important;
+    align-items: center!important;
+    justify-content: center!important;
+}
+
+.syonet-button{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 1em;
+    padding: 10px;
+    border-radius: 5px;
+    border: none!important;
+    cursor: pointer!important;
+    transition: background-color 0.3s ease;
+}
+.syonet-button-default{
+    background-color: #005db4!important;
+    color: #fff!important;
+}
+
+.syonet-button-default:hover {
+    background-color: #004a99!important;
+    color: #fff!important;
+}
+.syonet-button-sucess:hover {
+    background-color: #006b38!important;
+    color: #fff!important;
+}
+
+.syonet-button-danger {
+    background-color: #c42a43!important;
+    color: #fff!important;
+}
+
+.syonet-button-danger:hover {
+    background-color: #a12238!important;
+    color: #fff!important;
+}
+
+/* GRUPOS DE CAMPOS*/
+.syonet-form-wrapper {
+--input-height: 40px;
+--input-padding: 10px;
+--input-line-height: 1.5em;
+--input-font-size: 1em;
+position: relative;
+}
+.syonet-form-wrapper .form-group {
+    display: grid
+;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 25px;
+    margin-bottom: 20px;
+}
+.syonet-form-wrapper label, .syonet-form-field-label {
+    font-weight: 600!important;
+    font-family: 'Poppins', sans-serif!important;
+    color: #1b1b1f!important;
+}
+.syonet-form-wrapper  input, .syonet-form-wrapper textarea {
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+        
+    font-family: 'Poppins', sans-serif;
+    color: #1b1b1f;
+    width: fit-content;
+    min-width: 100%;
+    resize: none;
+    height: fit-content;
+    field-sizing: content;
+    min-height: var(--input-height);
+    padding: var(--input-padding)!important;
+    line-height: var(--input-line-height)!important;
+    font-size: var(--input-font-size)!important;
+}
+.syonet-form-wrapper button {
+    min-height: var(--input-height)!important;
+    padding: var(--input-padding)!important;
+    line-height: var(--input-line-height)!important;
+    font-size: var(--input-font-size)!important;
+}
+
+
+
+
+.syonet-form-wrapper .form-group-item {
+    display: grid;
+    flex-direction: column;
+    gap: 25px;
+    align-items: start;
+    align-content: start;
+}
+.syonet-form-wrapper .form-group-item.max-width {
+    grid-column: span 4;
+}
+.syonet-form-wrapper .form-group-item.half-width {
+    grid-column: span 2;
+}
+.syonet-form-wrapper.form-wrapper {
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    border: 1px solid #e0e0e0;
+    margin-top: 20px;
+    gap:20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.syonet-form-wrapper .success-message {
+    color: #008a49;
+    font-weight: 500;
+    font-family: 'Poppins', sans-serif;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #dcfce4;
+    border: 1px solid #008000;
+}
+.syonet-form-wrapper .error-message {
+    color: #ff0000;
+    font-weight: 500;
+    font-family: 'Poppins', sans-serif;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #f8d7da;
+    border: 1px solid #ff0000;
+}
+.syonet-form-wrapper .info-message {
+    color: #004085;
+    font-weight: 500;
+    font-family: 'Poppins', sans-serif;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #cfe2ff;
+    border: 1px solid #004085;
+}
+
+/* MENUS */
+
+#menu-posts-syonet_form, #menu-posts-syonet_submissions {
+    display: none !important;
+}
+#toplevel_page_syonet-options {
+    overflow: hidden;
+}
+.toplevel_page_syonet-options ul {
+    border-left: 0 !important;
+}
+.wp-has-current-submenu > a, .wp-has-current-submenu:hover > a {
+    color: #fff !important;
+    background-color: #2271b1 !important;
+}
+.wp-hass-current-submenu .wp-menu-name {
+    color: #fff !important;
+    fill: #fff !important;
+}
+.wp-hass-current-submenu:hover .wp-menu-name {
+    color: #fff !important;
+}
+#adminmenu li.wp-has-submenu.wp-not-current-submenu.opensub:hover:after,
+#adminmenu li.wp-has-submenu.wp-not-current-submenu:focus-within:after,
+#adminmenu li.wp-has-submenu.wp-not-current-submenu:after {
+    border-right-color: rgb(255, 255, 255) !important;
+}
+#adminmenu li.wp-has-submenu.wp-has-current-submenu:after {
+    right: 0;
+    border: 8px solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    top: 10px;
+    z-index: 10000;
+}
+#toplevel_page_syonet-options .wp-submenu {
+    top: 0px !important;
+    border: 0px !important;
+}
+#toplevel_page_syonet-options a {
+    transition: padding 0s !important;
+}
+
+/* gerais */
+
+/* oculta o aviso de atualização do elementor */
+.e-notice{
+    display: none !important;
+}

@@ -1,0 +1,216 @@
+<?php
+
+require_once('includes/functions/api_consumer.php');
+require_once FORMULARIO_SYONET_DIR . 'includes/classes/form-fields.php';
+
+function mpf_save_form() {
+    global $wpdb;
+    $username = get_option('syonet_username');
+    $password = get_option('syonet_password');
+    $api_link = get_option('syonet_api_link');
+
+    // Verifica nonce para segurança (adicione ao seu formulário)
+    check_ajax_referer('mpf_save_form_nonce', 'nonce');
+    error_log('Dados recebidos: ' . print_r($_POST, true));
+
+    $post_id = $_POST['post_id'] ?? NULL;
+    
+    // Captura todos os dados do formulário
+    $contact_preference = isset($_POST['contact_preference']) ? $_POST['contact_preference'] : 'Nenhum';
+    $days_to_update = isset($_POST['days_to_update']) ? $_POST['days_to_update'] : 0;
+    $rules = isset($_POST['rules']) ? $_POST['rules'] : FALSE;
+    $additional_fields = isset($_POST['additional_fields']) ? $_POST['additional_fields'] : null;
+    $update_data = $_POST['update_data'] ?? NULL;
+    $company = $_POST['company'];
+    $company = explode(',', $company);
+    $companyID = $company[0] ?? NULL;
+    $companyName = $company[1] ?? NULL; 
+    $event_type = wp_get_post_terms($post_id, 'event_type');
+    $event_group = wp_get_post_terms($post_id, 'event_group');
+    $originalEvent = null;
+
+    // Extrair apenas os nomes dos termos
+    $event_type = wp_list_pluck($event_type, 'name'); // Pega os nomes dos tipos de evento
+    $event_group = wp_list_pluck($event_group, 'name'); // Pega os nomes dos grupos de evento
+
+    $event_type = !empty($event_type) ? $event_type[0] : ''; // Pega o primeiro nome do tipo de evento
+    $event_group = !empty($event_group) ? $event_group[0] : ''; // Pega o primeiro nome do grupo de evento
+
+    function generateE164Number($ddi, $ddd, $phone) {
+        // Remove caracteres não numéricos do número de telefone
+        $phone = preg_replace('/\D/', '', $phone);
+        
+        // Verifica se o DDI e o DDD são válidos
+        if (!empty($ddi) && !empty($ddd) && !empty($phone)) {
+            // Retorna o número no formato E.164
+            return '+' . $ddi . $phone; // O DDI já inclui o código do país
+        }
+        
+        return null; // Retorna null se os dados não forem válidos
+    }
+
+    $e164Number = generateE164Number(intval($_POST['ddi'] ?? 0), intval($_POST['ddd'] ?? 0), preg_replace('/\D/', '', $_POST['phone'] ?? ''));
+
+    $data = [
+        'customer' => [
+            'name' => sanitize_text_field($_POST['name'] ?? ''),
+            'emails' => [
+                sanitize_email($_POST['email'] ?? '')
+            ],
+            'phones' => [
+                [
+                    'ddi' => intval($_POST['ddi'] ?? 0),
+                    'ddd' => intval($_POST['ddd'] ?? 0),
+                    'numero' => preg_replace('/\D/', '', $_POST['phone'] ?? ''), // Remove caracteres não numéricos
+                    'tipo' => sanitize_text_field($_POST['phone_type'] ?? ''),
+                    'e164Number' => $e164Number
+                ]
+            ],
+            'document' => sanitize_text_field($_POST['document'] ?? ''),
+            'documentType' => sanitize_text_field($_POST['document_type'] ?? ''),
+            'personType' => sanitize_text_field($_POST['person_type'] ?? ''),
+            'contactPreferenceType' => $contact_preference,
+            'addresses' => [
+                [
+                    'country' => sanitize_text_field($_POST['country'] ?? ''),
+                    'state' => sanitize_text_field($_POST['state'] ?? ''),
+                    'city' => sanitize_text_field($_POST['city'] ?? ''),
+                    'postcode' => sanitize_text_field($_POST['postcode'] ?? ''),
+                    'neighborhood' => sanitize_text_field($_POST['neighborhood'] ?? ''),
+                    'number' => sanitize_text_field($_POST['address_number'] ?? ''),
+                    'address' => sanitize_text_field($_POST['address'] ?? '')
+                ]
+            ]
+        ],
+        'event' => [
+            'companyId' => $companyID,
+            'eventGroup' => $event_group,
+            'eventType' => $event_type,
+            'source' => sanitize_text_field($_POST['source'] ?? ''),
+            'media' => sanitize_text_field($_POST['media'] ?? ''),
+            'comment' => sanitize_textarea_field($_POST['comment'] ?? ''),
+            'userId' => null,
+            'originalEvent' => $originalEvent,
+            'leadInfo' => new stdClass() // Um objeto vazio
+        ],
+        'daysToUpdateOpenEvent' => $days_to_update ?? NULL,
+        'rules' => [
+            'updateMainEmailPhone' => $update_data ?? NULL // Ajuste conforme necessário
+        ],
+        'additionalFields' => [
+            [
+                'kind' => 'Brand/Model',
+                'value' => [
+                    'brand' => sanitize_text_field($_POST['model']) ?? NULL // Captura o modelo/marca do formulário
+                ]
+            ]
+        ]
+    ];
+
+    // Codificando em JSON
+    $jsonData = json_encode($data);
+
+    // Processamento adicional para a API
+    try {
+        $customer = new Customer(
+            $data['customer']['name'],
+            $data['customer']['emails'],
+            $data['customer']['phones'],
+            $data['customer']['document'],
+            $data['customer']['documentType'],
+            $data['customer']['personType'],
+            $data['customer']['addresses']
+        );
+
+        $event = new Event(
+            [$data['event']['companyId']],
+            $data['event']['eventGroup'],
+            $data['event']['eventType'],
+            $data['event']['source'],
+            $data['event']['media'],
+            $data['event']['comment'],
+            $data['event']['originalEvent'],
+            $data['event']['leadInfo']
+        );
+
+        $additionalFields = [
+            new AdditionalFields('Brand/Model', ['brand' => $_POST['model'] ?? NULL]) // Ajustado para incluir apenas o brand
+        ];
+
+        $payload = new RequestPayload(
+            $customer, 
+            $event, 
+            $data['daysToUpdateOpenEvent'] ?? NULL, 
+            $data['rules']['updateMainEmailPhone'] ?? NULL, 
+            $additionalFields
+        );
+
+        $jsonData = json_encode($payload->toArray());
+        $jsonData = json_encode($data);
+        $apiResponse = sendDataToApi($api_link, $username, $password, $jsonData);
+
+        // Prepare os dados para inserção
+        $data_to_insert = [
+            'name' => sanitize_text_field($_POST['name']),
+            'email' => sanitize_email($_POST['email']),
+            'ddi' => intval($_POST['ddi']),
+            'ddd' => intval($_POST['ddd']),
+            'phone' => preg_replace('/\D/', '', $_POST['phone']), // Remove caracteres não numéricos
+            'phone_type' => sanitize_text_field($_POST['phone_type']),
+            'document' => sanitize_text_field($_POST['document']),
+            'document_type' => sanitize_text_field($_POST['document_type']),
+            'person_type' => sanitize_text_field($_POST['person_type']),
+            'contact_preference_type' => $contact_preference,
+            'country' => sanitize_text_field($_POST['country']),
+            'state' => sanitize_text_field($_POST['state']),
+            'city' => sanitize_text_field($_POST['city']),
+            'postcode' => sanitize_text_field($_POST['postcode']),
+            'neighborhood' => sanitize_text_field($_POST['neighborhood']),
+            'address_number' => sanitize_text_field($_POST['address_number']),
+            'address' => sanitize_text_field($_POST['address']),
+            'company_id' => intval($companyID),
+            'company' => sanitize_text_field($companyName),
+            'model' => sanitize_text_field($_POST['model']),
+            'source' => sanitize_text_field($_POST['source']),
+            'media' => sanitize_text_field($_POST['media']),
+            'comment' => sanitize_textarea_field($_POST['comment']),
+            'days_to_update' => intval($days_to_update) ?? NULL,
+            'rules' => json_encode($rules) ?? NULL,
+            'additional_fields' => json_encode($additional_fields) ?? NULL,
+            'json_data' => json_encode($data),
+            'api_response' => json_encode($apiResponse) ?? NULL,
+            'created_at' => current_time('mysql')
+        ];
+
+        // Criar um post no tipo de post syonet_submissions
+        $post_data = [
+            'post_title'   => sanitize_text_field($_POST['name']),
+            'post_content' => '', // Conteúdo pode ser deixado vazio
+            'post_status'  => 'publish',
+            'post_type'    => 'syonet_submissions',
+        ];
+        $post_id = wp_insert_post($post_data); // Insere o post e captura o ID
+
+        // Verifica se o post foi criado com sucesso
+        if (is_wp_error($post_id)) {
+            wp_send_json_error('Erro ao criar o post: ' . $post_id->get_error_message());
+        }
+
+        // Inserir os dados como post_meta
+        foreach ($data_to_insert as $meta_key => $meta_value) {
+            update_post_meta($post_id, $meta_key, $meta_value);
+        }
+
+        wp_send_json_success([
+            'message' => 'Dados salvos e enviados com sucesso!',
+            'api_data' => $jsonData
+        ]);
+        
+
+    } catch (Exception $e) {
+        wp_send_json_error('Erro no processamento: ' . $e->getMessage());
+    }
+}
+
+add_action('wp_ajax_mpf_save_form', 'mpf_save_form');
+add_action('wp_ajax_nopriv_mpf_save_form', 'mpf_save_form');

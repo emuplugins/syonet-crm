@@ -1,0 +1,331 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Sora:wght@100..800&display=swap');
+
+body.elementor-editor-active .steps-container .step:first-of-type, body.elementor-editor-preview .steps-container .step:first-of-type {
+    opacity: 1 !important;
+    z-index: 1 !important;
+    pointer-events: auto !important;
+    position: relative !important;
+}
+
+.form-wizard {
+    --main-font-size: 16px; /* Exemplo de tamanho de fonte para rótulos */
+    --field-font-size: 16px; /* Tamanho da fonte para campos de entrada */
+    --main-color: #cc0927;
+    --dark-color: #a00e21;
+    --step-color: #ced7e0;
+    --black-color: #171717;
+    --submit-button-color: #266cee;
+    --submit-button-color-hover: #1e57a5;
+    --focus-color: #266cee;
+    --label-color: var(--black-color); /* Cor dos rótulos */
+    --input-border-color: var(--field-border-color); /* Cor da borda dos inputs */
+    --field-border-color: #e1e8f1;
+    --completed-color: yellowgreen; /* Cor para o ícone de sucesso */
+    --completed-bg-color: white; /* Cor de fundo para a seção de completado */
+    --progress-width: calc((var(--steps) - 1) / var(--steps) * 100%);
+    --field-height: 40px;
+    --field-padding: 0px 8px;
+    --step-font-size: calc(var(--main-font-size) * 0.9);
+    --step-number-font-size: var(--main-font-size);
+    --field-border-radius: 10px;
+    --button-border-radius: 16px;
+    --button-padding: 8px 16px;
+    --button-font-size: var(--main-font-size);
+    --main-font-family: 'Inter', sans-serif;
+    --field-border-width: 1px;
+    --form-border-radius: 10px;
+    --form-padding: 32px;
+    --form-background-color: rgb(255, 255, 255);
+    --form-shadow: 0 4px 16px rgba(167,21,84,0.1);
+    --field-background-color: #ffffff;
+    --label-margin-bottom: 14px;
+    --steps: 3; /* Definindo um valor padrão para --steps */
+    --form-title-margin-bottom: 20px; /* Definindo um valor padrão para --form-title-margin-bottom */
+    --form-title-gap: 10px; /* Definindo um valor padrão para --form-title-gap */
+    --form-title-justify-content: center; /* Definindo um valor padrão para --form-title-justify-content */
+    --form-title-align-items: center; /* Definindo um valor padrão para --form-title-align-items */
+    --form-title-font-weight: 700; /* Definindo um valor padrão para --form-title-font-weight */
+    --form-title-font-size: 24px; /* Definindo um valor padrão para --form-title-font-size */
+    --form-width: 100%;
+    --step-gap: 24px;
+}
+
+.form-wizard * {
+    /* font-family: var(--main-font-family); /* Certifique-se de que a fonte esteja definida corretamente */
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    position: relative;
+}
+/* 
+.form-wizard {
+    color: var(--black-color)!important;
+    background-color: var(--form-background-color)!important;
+    padding: var(--form-padding)!important;
+    border-radius: var(--field-border-radius)!important;
+    box-shadow: var(--form-shadow)!important;
+    width: var(--form-width)!important;
+} */
+
+.form-wizard h3 {
+    text-align: center;
+    margin-bottom: var(--form-title-margin-bottom);
+    display: flex;
+    gap: var(--form-title-gap);
+    flex-direction: column;
+    justify-content: var(--form-title-justify-content);
+    align-items: var(--form-title-align-items);
+    font-weight: var(--form-title-font-weight);
+    font-size: var(--form-title-font-size);
+    color: var(--black-color);
+}
+
+.form-wizard h3 span {
+    text-align: center;
+    font-size: var(--span-font-size);
+    font-weight: var(--span-font-weight);
+    color: var(--span-color);
+}
+
+.form-wizard label {
+    display: inline-block;
+    /* font-weight: 600; */
+    /* color: var(--label-color) !important; */
+    z-index: 1;
+    margin-left: 4px;
+    transition: all 0.3s ease;
+    will-change: transform, font-size;
+}
+
+.form-wizard [hidden] {
+    display: none;
+}
+
+.form-wizard input, .form-wizard textarea, .form-wizard select {
+    /* border: var(--field-border-width) solid var(--input-border-color)!important; */
+    /* height: var(--field-height); Se você tiver uma variável para altura */
+    /* border-radius: var(--field-border-radius)!important; */
+    width: 100%;
+    /* font-size: var(--field-font-size)!important; */
+    outline: none!important;
+    transition:box-shadow 0.2s;
+    /* padding: var(--field-padding); */
+    /* background-color: var(--field-background-color)!important; */
+}
+
+/* Adicionando box-shadow apenas em eventos de foco e hover */
+.form-wizard input:focus, .form-wizard textarea:focus, .form-wizard select:focus,
+.form-wizard input:focus-within, .form-wizard textarea:focus-within, .form-wizard select:focus-within, .form-wizard .selected-flag:focus-within, .form-wizard .selected-flag:focus {
+    position: relative; /* Necessário para o posicionamento do pseudo-elemento */
+    box-shadow: 0 0 0 3px var(--focus-color);
+    outline: none;
+}
+
+.form-wizard textarea {
+    resize: none;
+    height: fit-content;
+    field-sizing: content;
+    flex-grow: 1;
+    min-height: var(--field-height);
+    padding-top:10px!important;
+    padding-bottom:10px!important;
+}
+
+.form-wizard button {
+    all: unset;
+    cursor: pointer;
+    border: none;
+    border-radius: var(--button-border-radius);
+    padding: var(--button-padding);
+    font-size: var(--button-font-size);
+    transition: 0.4s;
+    text-align: center;
+}
+
+
+.form-wizard button:disabled {
+    opacity: 0.8s;
+}
+
+/* .form-wizard button[type="submit"] {
+    
+} */
+
+.form-wizard .phone-input{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    height: auto;
+}
+
+.form-wizard .phone-input .custom-select{
+    height: auto!important;
+}
+
+
+
+.form-wizard {
+    background-color: white;
+    padding:32px;
+    border-radius: var(--form-border-radius);
+    width: var(--form-width);
+    box-shadow: 0 4px 16px rgba(167,21,84,0.1);
+}
+.form-wizard .form-group{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap:16px;
+}
+.form-wizard .form-group .form-control-syonet{
+    flex:1;
+}
+.form-wizard .progress-container::before {
+    content: "";
+    height: 4px;
+    width: var(--progress-width);
+    background-color: var(--step-color);
+    position:absolute;
+    top: calc(var(--step-size) / 2);
+    left: 50%;
+    translate: -50% -50%;
+}
+
+.form-wizard .progress-container .progress {
+    content: "";
+    height: 4px;
+    width: var(--progress-width);
+    background-color: var(--main-color);
+    position:absolute;
+    top: calc(var(--step-size) / 2);
+    left: 50%;
+    translate: -50% -50%;
+    z-index: 2;
+    transform:  scaleX(33.33%);
+    transform-origin: left;
+    transition: 0.4s;
+}
+
+.form-wizard .progress-container ol {
+    list-style-type: none;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    counter-reset: step-number;
+    z-index: 3
+}
+
+.form-wizard .progress-container li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap:8px;
+    color: var(--step-color);
+    flex:1;
+    transition: 0.4s linear 0.4s font-size 0s !important;
+}
+
+.form-wizard .progress-container li::before {
+    counter-increment: step-number;
+    content: counter(step-number);
+    background-color: var(--step-color);
+    width: var(--step-size);
+    height: var(--step-size);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    color:white;
+    transition: 0.4s linear 0.4s font-size 0s !important;
+    min-width: 15px;
+    min-height: 15px;
+}
+
+.form-wizard .progress-container li:where(.done, .current){
+    color: #171717;
+    font-weight: 600;
+}
+
+/* .form-wizard .progress-container li.done::before {
+
+} */
+
+
+.form-wizard .progress-container li.current::before {
+    background-color: var(--main-color);
+    box-shadow: 0 0 0 3px rgba(167, 21, 84, 0.25);
+}
+
+.form-wizard .steps-container{
+    display: flex;
+    overflow: visible;
+    flex-direction: column;
+    /* alterado */
+}
+
+.form-wizard .step {
+    flex: 1 0 100%;
+    padding: 24px 8px;
+    /* alterado */
+    opacity: 0;
+   
+    height: fit-content;
+    display: grid;
+    gap:var(--step-gap);
+    z-index: -10000;
+    position:absolute;
+    pointer-events: none;
+}
+
+.form-wizard .step.current {
+    transition: opacity 0.3s;
+}
+
+.form-wizard .controls{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap:16px;
+    margin-top:16px;
+    padding-inline: 8px;
+}
+
+.form-wizard .controls button{
+    flex:1;
+}
+
+.form-wizard .completed {
+    text-align: center;
+}
+
+.form-wizard .completed h3 {
+    margin-bottom: 8px;
+}
+
+.form-wizard .completed svg {
+    width: 100px;
+    height: 100px;
+    stroke: var(--completed-color);
+}
+
+.form-wizard .completed:not([hidden]) ~ * {
+    display: none;
+}
+
+
+.form-wizard .show-address{
+    display: none;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+
+
