@@ -5,6 +5,7 @@
 }
 /* Estilização do dropdown */
 .form-wizard .custom-select {
+    padding: 0;
     position: relative;
     width: 42px;
     align-items: center;
