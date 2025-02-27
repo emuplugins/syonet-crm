@@ -115,3 +115,7 @@
 .form-wizard .dropdown div:last-child {
     border-bottom: none;
 }
+
+.form-wizard .form-group{
+    margin-bottom: 0;
+}
