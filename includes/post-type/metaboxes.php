@@ -101,7 +101,7 @@ function add_event_group_after_title($post) {
         
         <span class="info-message copy-event-code" style="width:fit-content; position:relative; font-size:0.9em!important; padding: 0.55em 0.8em!important;">
         
-        COPIAR SHORTCODE:<b></b></span>
+        COPIAR SHORTCODE<b></b></span>
         
         <span id="check-mark" style="opacity:0; transition:opacity 0.3s ease; color: green; font-size: 20px; position:absolute!important; left:-40px; bottom:10px;">✔️</span> 
         
@@ -167,8 +167,8 @@ function add_event_group_after_title($post) {
 
         <div id="publishing-action">
             <span class="spinner"></span>
-            <input name="original_publish" type="hidden" id="original_publish" value="Atualizar">
-            <input type="submit" name="save" id="publish" class="button button-primary button-large" value="Atualizar">
+            <input name="original_publish" type="hidden" id="original_publish" value="<?php echo $post->post_status == 'publish' ? 'Atualizar' : 'Publicar'; ?>">
+            <input type="submit" name="<?php echo $post->post_status == 'publish' ? 'update' : 'publish'; ?>" id="publish" class="button button-primary button-large" value="<?php echo $post->post_status == 'publish' ? 'Atualizar' : 'Publicar'; ?>">
         </div>
         <div class="clear"></div>
     </div>

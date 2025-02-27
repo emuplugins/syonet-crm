@@ -149,7 +149,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const formData = new FormData(form);
 
             submitButton.disabled = true;
-            submitButton.textContent = "Submitting...";
+            submitButton.textContent = "Enviando...";
 
             console.log(Object.fromEntries(formData));
 

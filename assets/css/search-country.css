@@ -65,13 +65,14 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    aspect-ratio: 1/0.8;
+    object-fit: contain;
+    padding: 5px;
     
 }
 .form-wizard .selected-flag img{
     object-fit: cover;
     object-position: center;
-    border-radius:7px;
+    border-radius:3px;
     aspect-ratio: 1/0.7;
 }
 

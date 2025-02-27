@@ -23,11 +23,12 @@ function mpf_register_syonet_form_post_type() {
 
     $args = array(
         'labels'             => $labels,
-        'public'             => false,
+        'public'             => true,
         'publicly_queryable' => false,
         'show_ui'            => true,
         'show_in_menu'       => true,
         'show_in_rest' => false,
+        'exclude_from_search' => true,
         'query_var'          => true,
         'rewrite'            => array('slug' => 'syonet_form'),
         'capability_type'    => 'post',
@@ -60,8 +61,9 @@ function mpf_register_syonet_submissions() {
 
     $args = array(
         'labels'             => $labels,
-        'public'             => false,
+        'public'             => true,
         'publicly_queryable' => false,
+        'exclude_from_search' => true,
         'show_ui'            => true,
         'show_in_menu'       => true,
         'show_in_rest' => false,

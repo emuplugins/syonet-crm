@@ -2,6 +2,22 @@ document.addEventListener("DOMContentLoaded", function () {
     // Obtém a URL atual
     var currentUrl = window.location.href;
 
+
+    var allowedPages = 
+    [ 
+    "edit.php?post_type=syonet_form",
+    "edit-tags.php?taxonomy=event_group",
+    "edit-tags.php?taxonomy=empresa",
+    "edit.php?post_type=syonet_submissions",
+    "term.php?taxonomy=empresa",
+    "term.php?taxonomy=event_group",
+    "term.php?taxonomy=event_type",
+    ];
+
+    if ( ! allowedPages.some(page => currentUrl.includes(page))) {
+        return;
+    }
+
     // Seleciona o menu principal
     var menuItem = document.querySelector("#toplevel_page_syonet-options");
 
@@ -12,7 +28,10 @@ document.addEventListener("DOMContentLoaded", function () {
         var pages = {
             "edit.php?post_type=syonet_form": 'a[href="edit.php?post_type=syonet_form"]',
             "edit-tags.php?taxonomy=event_group": 'a[href*="edit-tags.php?taxonomy=event_group"]',
-            "edit-tags.php?taxonomy=empresa": 'a[href*="edit-tags.php?taxonomy=empresa"]'
+            "term.php?taxonomy=event_group": 'a[href*="edit-tags.php?taxonomy=event_group"]',
+            "edit-tags.php?taxonomy=empresa": 'a[href*="edit-tags.php?taxonomy=empresa"]',
+            "term.php?taxonomy=empresa": 'a[href*="edit-tags.php?taxonomy=empresa"]',
+            "edit.php?post_type=syonet_submissions": 'a[href*="edit.php?post_type=syonet_submissions"]',
         };
 
         // Percorre as páginas e aplica as classes corretas

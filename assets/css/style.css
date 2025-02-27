@@ -16,7 +16,6 @@ body.elementor-editor-active .steps-container .step:first-of-type, body.elemento
     --black-color: #171717;
     --submit-button-color: #266cee;
     --submit-button-color-hover: #1e57a5;
-    --focus-color: #266cee;
     --label-color: var(--black-color); /* Cor dos rótulos */
     --input-border-color: var(--field-border-color); /* Cor da borda dos inputs */
     --field-border-color: #e1e8f1;
@@ -31,7 +30,7 @@ body.elementor-editor-active .steps-container .step:first-of-type, body.elemento
     --button-border-radius: 16px;
     --button-padding: 8px 16px;
     --button-font-size: var(--main-font-size);
-    --main-font-family: 'Inter', sans-serif;
+    --main-font-family: sans-serif;
     --field-border-width: 1px;
     --form-border-radius: 10px;
     --form-padding: 32px;
@@ -56,6 +55,7 @@ body.elementor-editor-active .steps-container .step:first-of-type, body.elemento
     margin: 0;
     box-sizing: border-box;
     position: relative;
+    font-family: var(--main-font-family);
 }
 /* 
 .form-wizard {
@@ -68,49 +68,28 @@ body.elementor-editor-active .steps-container .step:first-of-type, body.elemento
 } */
 
 .form-wizard h3 {
-    text-align: center;
-    margin-bottom: var(--form-title-margin-bottom);
     display: flex;
-    gap: var(--form-title-gap);
     flex-direction: column;
     justify-content: var(--form-title-justify-content);
     align-items: var(--form-title-align-items);
-    font-weight: var(--form-title-font-weight);
-    font-size: var(--form-title-font-size);
-    color: var(--black-color);
-}
-
-.form-wizard h3 span {
-    text-align: center;
-    font-size: var(--span-font-size);
-    font-weight: var(--span-font-weight);
-    color: var(--span-color);
 }
 
 .form-wizard label {
     display: inline-block;
     /* font-weight: 600; */
     /* color: var(--label-color) !important; */
+    font-family: var(--main-font-family);
     z-index: 1;
     margin-left: 4px;
-    transition: all 0.3s ease;
-    will-change: transform, font-size;
 }
-
 .form-wizard [hidden] {
     display: none;
 }
 
 .form-wizard input, .form-wizard textarea, .form-wizard select {
-    /* border: var(--field-border-width) solid var(--input-border-color)!important; */
-    /* height: var(--field-height); Se você tiver uma variável para altura */
-    /* border-radius: var(--field-border-radius)!important; */
     width: 100%;
-    /* font-size: var(--field-font-size)!important; */
     outline: none!important;
     transition:box-shadow 0.2s;
-    /* padding: var(--field-padding); */
-    /* background-color: var(--field-background-color)!important; */
 }
 
 /* Adicionando box-shadow apenas em eventos de foco e hover */
@@ -134,7 +113,7 @@ body.elementor-editor-active .steps-container .step:first-of-type, body.elemento
 .form-wizard button {
     all: unset;
     cursor: pointer;
-    border: none;
+    border: solid;
     border-radius: var(--button-border-radius);
     padding: var(--button-padding);
     font-size: var(--button-font-size);
@@ -328,4 +307,12 @@ body.elementor-editor-active .steps-container .step:first-of-type, body.elemento
 }
 
 
+
+@media (max-width: 768px) {
+    .form-wizard .completed h3 {
+        margin-bottom: 20px;
+        font-weight: 700;
+        font-size: 20px;
+    }
+}
 

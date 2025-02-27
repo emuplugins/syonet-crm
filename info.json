@@ -1,0 +1,16 @@
+{
+    "name": "Syonet CRM",
+    "slug": "syonet-crm",
+    "version": "1.0.2",
+    "download_url": "https://github.com/emuplugins/syonet-crm/archive/refs/heads/main.zip",
+    "tested": "6.4",
+    "requires": "5.8",
+    "author": "Tonny",
+    "author_homepage": "https://angardagency.com",
+    "last_updated": "2025-02-27",
+    "sections": {
+      "description": "Nova versão com correções e melhorias.",
+      "changelog": "Correção de bugs e melhorias."
+    }
+  }
+  

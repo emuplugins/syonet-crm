@@ -44,8 +44,8 @@ $contact_preference = get_option('syonet_contact_preference');
 
     <h3 class="title">
             <?php if (!empty($logo)) echo '<img class="syonet-logo-form" src="'. $logo . '" alt="SyoNet" style="height: auto;">';
-            if (!empty($title)) echo '<span>' . $title . '</span>';
-            if (!empty($subtitle)) echo '<span>' . $subtitle . '</span>'; ?>
+            if (!empty($title)) echo '<span class="syonet-form-title">' . $title . '</span>';
+            if (!empty($subtitle)) echo '<span class="syonet-form-subtitle">' . $subtitle . '</span>'; ?>
         </h3>
 
         <div class="completed" hidden>

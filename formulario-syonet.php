@@ -1,9 +1,9 @@
 <?php
 /**
- * Plugin Name: Meu Plugin Formulário
- * Description: Um plugin para salvar dados de um formulário no banco de dados.
+ * Plugin Name: Syonet CRM
+ * Description: Integração com sistema Syonet CRM.
  * Version: 1.0
- * Author: Seu Nome
+ * Author: Tonny Santana
  */
 
 // Código do plugin vai aqui
@@ -23,6 +23,7 @@ require_once FORMULARIO_SYONET_DIR . 'includes/taxonomies/empresas/metaboxes.php
 require_once FORMULARIO_SYONET_DIR . 'includes/post-type/metaboxes.php';
 require_once FORMULARIO_SYONET_DIR . 'includes/post-type/envios.php';
 require_once FORMULARIO_SYONET_DIR . 'builders/core.php';
+require_once FORMULARIO_SYONET_DIR . 'update-handler.php';
 
 // Adiciona a página de opções
 add_action('admin_menu', 'syonet_add_options_page');
@@ -31,4 +32,3 @@ add_action('admin_menu', 'syonet_add_options_page');
 add_action('admin_enqueue_scripts', function() {
     wp_enqueue_script('option-page-change', FORMULARIO_SYONET_URL . 'assets/js/option-page-change.js', array(), '1.0', true);
 });
-
