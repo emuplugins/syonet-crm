@@ -197,14 +197,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
                 return response.json(); // Certifique-se de que você está esperando um JSON
             })
-            .then(data => {
-                console.log(data); // Adicione isso para ver a resposta
-                if (data.success) {
-                    alert("Dados enviados com sucesso!");
-                } else {
-                    alert("Erro: " + data.data);
-                }
-            })
             .catch(error => {
                 console.error("Erro na requisição:", error);
                 alert("Erro ao enviar os dados: " + error.message);
