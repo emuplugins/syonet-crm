@@ -157,7 +157,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // Simula uma requisição ao servidor
             setTimeout(() => {
-                form.querySelector('.completed').style.display = 'block'; // Exibe a mensagem de sucesso
+                form.querySelector('.completed').style.display = 'block!important'; // Exibe a mensagem de sucesso
                 form.reset(); // Reseta o formulário
                 // Oculta o formulário e o título após o envio
                 form.querySelector('.steps-container').style.display = 'none'; 
