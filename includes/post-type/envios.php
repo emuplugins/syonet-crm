@@ -94,7 +94,7 @@ function mpf_render_syonet_submissions_metabox($post) {
   document.querySelector('.copy-event-code').addEventListener('click', function() {
     // Copiar o texto do evento para a área de transferência
     const text = this.textContent || this.innerText;
-    const textreplace = text.replace('EVENTO:', '');
+    const textreplace = text.replace('COPIAR: ', '');
     navigator.clipboard.writeText(textreplace).then(function() {
       // Exibir o emoji de check
       const checkMark = document.getElementById('check-mark');

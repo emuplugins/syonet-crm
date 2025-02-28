@@ -94,7 +94,7 @@ position: relative;
     color: #1b1b1f!important;
 }
 .syonet-form-wrapper  input, .syonet-form-wrapper textarea {
-    border: 1px solid #e0e0e0;
+    border: 1px solid #e0e0e0!important;
     border-radius: 5px;
         
     font-family: 'Poppins', sans-serif;
@@ -235,4 +235,8 @@ position: relative;
 /* oculta o aviso de atualização do elementor */
 .e-notice{
     display: none !important;
+}
+
+.syonet-form-wrapper.form-wrapper input {
+    border-color: #b6c7d670;
 }
