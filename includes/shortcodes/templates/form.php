@@ -217,7 +217,7 @@ $steps =  [
             'placeholder' => 'suaconta@email.com'
         ],
         'phone' => [
-            'label' => 'Número de telefone',
+            'label' => 'Número do Whatsapp',
             'required' => true,
             'type' => 'tel',
             'placeholder' => '(99) 99999-9999'
