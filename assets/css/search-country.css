@@ -123,8 +123,7 @@
 
 .form-wizard .form-group .form-control-syonet {
     flex: 1;
-    display: flex;
+    display: grid;
     flex-direction: row;
-    justify-content: space-between;
     flex-wrap: wrap;
 }

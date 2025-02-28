@@ -64,6 +64,7 @@ function edit_event_type_relation_field($term, $taxonomy) {
                 <label for="related_event_types" class="syonet-form-field-label">Adicionar novo tipo de evento:</label>
                 
                 <div class="form-group" style="margin-bottom: 0px!important; grid-template-columns: 2.8fr 1fr!important;">
+
                     <div class="form-group-item ">
                         <input type="text" id="new_event_type" placeholder="Nome do tipo de evento">
                         <input type="hidden" id="event_group_id" value="<?php echo esc_attr($term->term_id); ?>">
@@ -72,6 +73,7 @@ function edit_event_type_relation_field($term, $taxonomy) {
                     <div class="form-group-item">
                         <button type="button" id="add_event_type" class="button syonet-button syonet-button-default"><?php _e('Adicionar Novo', 'my_domain'); ?></button>
                     </div>
+                    
                     <p id="event_type_status" class="success-message form-group-item max-width" style="display: none; grid-column: span 2; width:auto; max-width:100%"><?php _e('Tipo de Evento adicionado!', 'my_domain'); ?></p>
 
                     

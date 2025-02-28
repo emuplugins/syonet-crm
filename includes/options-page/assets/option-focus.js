@@ -6,12 +6,12 @@ document.addEventListener("DOMContentLoaded", function () {
     var allowedPages = 
     [ 
     "edit.php?post_type=syonet_form",
-    "edit-tags.php?taxonomy=event_group",
-    "edit-tags.php?taxonomy=empresa",
+    "edit-tags.php?taxonomy=syonet_event_group",
+    "edit-tags.php?taxonomy=syonet_company",
     "edit.php?post_type=syonet_submissions",
-    "term.php?taxonomy=empresa",
-    "term.php?taxonomy=event_group",
-    "term.php?taxonomy=event_type",
+    "term.php?taxonomy=syonet_company",
+    "term.php?taxonomy=syonet_event_group",
+    "term.php?taxonomy=syonet_event_type",
     ];
 
     if ( ! allowedPages.some(page => currentUrl.includes(page))) {
@@ -27,10 +27,9 @@ document.addEventListener("DOMContentLoaded", function () {
         // Lista de páginas e suas respectivas classes de menu
         var pages = {
             "edit.php?post_type=syonet_form": 'a[href="edit.php?post_type=syonet_form"]',
-            "edit-tags.php?taxonomy=event_group": 'a[href*="edit-tags.php?taxonomy=event_group"]',
-            "term.php?taxonomy=event_group": 'a[href*="edit-tags.php?taxonomy=event_group"]',
-            "edit-tags.php?taxonomy=empresa": 'a[href*="edit-tags.php?taxonomy=empresa"]',
-            "term.php?taxonomy=empresa": 'a[href*="edit-tags.php?taxonomy=empresa"]',
+            "edit-tags.php?taxonomy=syonet_event_group": 'a[href*="edit-tags.php?taxonomy=syonet_event_group"]',
+            "edit-tags.php?taxonomy=syonet_company": 'a[href*="edit-tags.php?taxonomy=syonet_company"]',
+            "term.php?taxonomy=syonet_company": 'a[href*="edit-tags.php?taxonomy=syonet_company"]',
             "edit.php?post_type=syonet_submissions": 'a[href*="edit.php?post_type=syonet_submissions"]',
         };
 

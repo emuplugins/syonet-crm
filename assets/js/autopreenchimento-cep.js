@@ -1,3 +1,14 @@
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.querySelector('.form-wizard');
+    const cepInput = form.querySelector('#postcode');
+
+    if (cepInput) {
+        cepInput.addEventListener('blur', function() {
+            buscaCep(cepInput.value);
+        });
+    }
+});
+            
 function buscaCep(cep) {
     const form = document.querySelector('.form-wizard');
 
@@ -16,7 +27,7 @@ function buscaCep(cep) {
             }
             const showAddress = form.querySelectorAll(".show-address");
             showAddress.forEach(address => {
-                address.style.display = "flex";
+                address.style.setProperty('display', 'flex', 'important'); 
             });
             // Preencher os campos se existirem no HTML
             let inputAddress = form.querySelector("#address");

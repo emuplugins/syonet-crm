@@ -116,15 +116,12 @@ position: relative;
     font-size: var(--input-font-size)!important;
 }
 
-
-
-
 .syonet-form-wrapper .form-group-item {
     display: grid;
     flex-direction: column;
     gap: 25px;
-    align-items: start;
-    align-content: start;
+    align-items: stretch;
+    align-content: stretch;
 }
 .syonet-form-wrapper .form-group-item.max-width {
     grid-column: span 4;
@@ -151,6 +148,11 @@ position: relative;
     border-radius: 5px;
     background-color: #dcfce4;
     border: 1px solid #008000;
+    display: flex
+;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
 }
 .syonet-form-wrapper .error-message {
     color: #ff0000;
@@ -159,7 +161,11 @@ position: relative;
     padding: 10px;
     border-radius: 5px;
     background-color: #f8d7da;
-    border: 1px solid #ff0000;
+    border: 1px solid #ff0000;display: flex
+    ;
+        align-content: center;
+        justify-content: center;
+        align-items: center;
 }
 .syonet-form-wrapper .info-message {
     color: #004085;
@@ -168,7 +174,11 @@ position: relative;
     padding: 10px;
     border-radius: 5px;
     background-color: #cfe2ff;
-    border: 1px solid #004085;
+    border: 1px solid #004085;display: flex
+    ;
+        align-content: center;
+        justify-content: center;
+        align-items: center;
 }
 
 /* MENUS */
