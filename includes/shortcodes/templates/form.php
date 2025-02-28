@@ -226,7 +226,8 @@ $steps =  [
             'label' => 'Tipo',
             'required' => true,
             'type' => 'select',
-            'options' => $phone_types
+            'options' => $phone_types,
+            'placeholder' => FALSE
         ],
         // 'source' => [
         //     'label' => 'Onde nos conheceu:',
@@ -319,13 +320,15 @@ $steps =  [
             'label' => 'Concessionária',
             'required' => true,
             'type' => 'select',
-            'options' => $empresas
+            'options' => $empresas,
+            'placeholder' => 'Escolher opção'
         ],
         'model' => [
-            'label' => 'Escolha seu veículo',
+            'label' => 'Escolha sua moto',
             'required' => true,
             'type' => 'select',
-            'options' => $veiculos
+            'options' => $veiculos,
+            'placeholder' => 'Escolher opção'
         ],
 //         'contact_preference' => [
 //             'label' => 'Preferência de contato',
@@ -404,12 +407,12 @@ $steps =  [
                     <div class="form-control-syonet">
                         <?php if ($details['type'] == 'text'): ?>
                             <label for="<?php echo $field; ?>"><?php echo $details['label']; ?></label>
-                            <input type="text" name="<?php echo $field; ?>" id="<?php echo $field; ?>" placeholder="<?php echo $details['label']; ?>">
+                            <input type="text" name="<?php echo $field; ?>" id="<?php echo $field; ?>" <?php echo $details['required'] ? 'required' : ''; ?> placeholder="<?php echo $details['label']; ?>">
                         <?php endif; ?>
         
                         <?php if ($details['type'] == 'email'): ?>
                             <label for="<?php echo $field; ?>"><?php echo $details['label']; ?></label>
-                            <input type="email" name="<?php echo $field; ?>" id="<?php echo $field; ?>" placeholder="<?php echo $details['label']; ?>">
+                            <input type="email" name="<?php echo $field; ?>" id="<?php echo $field; ?>" <?php echo $details['required'] ? 'required' : ''; ?> placeholder="<?php echo $details['label']; ?>">
                         <?php endif; ?>
         
                         <?php if ($details['type'] == 'tel'): ?>
@@ -433,14 +436,20 @@ $steps =  [
                                         </div>
                                     </div>
         
-                                    <input type="text" id="phone" name="phone" placeholder="(99) 99999-9999" required style="width: 70%; flex-grow: 1;" oninput="phoneNumberFormatter()" onblur="phoneNumberFormatter()">
+                                    <input type="text" id="phone" name="phone" placeholder="(99) 99999-9999" <?php echo $details['required'] ? 'required' : ''; ?> style="width: 70%; flex-grow: 1;" oninput="phoneNumberFormatter()" onblur="phoneNumberFormatter()">
                                 </div>
                             </div>
                         <?php endif; ?>
         
                         <?php if ($details['type'] == 'select'): ?>
                             <label for="<?php echo $field; ?>"><?php echo $details['label']; ?></label>
-                            <select name="<?php echo $field; ?>" id="<?php echo $field; ?>">
+                            <select name="<?php echo $field; ?>" id="<?php echo $field; ?>" <?php echo $details['required'] ? 'required' : ''; ?>>
+
+                                <?php if ($details['placeholder']): ?>
+                                    <option value="">
+                                        Escolha uma opção
+                                    </option>
+                                <?php endif; ?>
                                 <?php foreach ($details['options'] as $option): ?>
                                     <?php 
                                     // Verifica se o $option é um objeto WP_Term

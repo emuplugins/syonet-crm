@@ -153,6 +153,7 @@ position: relative;
     align-content: center;
     justify-content: center;
     align-items: center;
+    gap:5px;
 }
 .syonet-form-wrapper .error-message {
     color: #ff0000;
@@ -166,6 +167,7 @@ position: relative;
         align-content: center;
         justify-content: center;
         align-items: center;
+        gap:5px;
 }
 .syonet-form-wrapper .info-message {
     color: #004085;
@@ -179,6 +181,7 @@ position: relative;
         align-content: center;
         justify-content: center;
         align-items: center;
+        gap:5px;
 }
 
 /* MENUS */
