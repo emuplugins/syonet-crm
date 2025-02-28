@@ -316,7 +316,7 @@ $steps =  [
 
 //     'Conclusão' => [
         'company' => [
-            'label' => 'Consercionária',
+            'label' => 'Concessionária',
             'required' => true,
             'type' => 'select',
             'options' => $empresas
