@@ -1,5 +1,7 @@
 <?php
 
+if ( ! defined('ABSPATH')) exit;
+
 // Adicionar campo personalizado "ID da Empresa" ao adicionar termo
 function add_empresa_id_field($taxonomy) {
     wp_nonce_field('empresa_meta_new', 'empresa_meta_new_nonce');
