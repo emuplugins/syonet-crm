@@ -1,5 +1,7 @@
 <?php
 
+if ( ! defined('ABSPATH')) exit;
+
 // Registrar taxonomias personalizadas com labels dinâmicos
 function register_custom_taxonomies() {
     $taxonomies = [
