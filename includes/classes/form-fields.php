@@ -1,5 +1,7 @@
 <?php
 
+if ( ! defined('ABSPATH')) exit;
+
 class Customer 
 {
     // Para facilitar, vou usar camelCase por conta do request
