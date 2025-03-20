@@ -1,5 +1,7 @@
 <?php
 
+if ( ! defined('ABSPATH')) exit;
+
 // Adicionar campo de relacionamento ao adicionar termo
 function add_event_type_relation_field($taxonomy) {
     $event_types = get_terms(array('taxonomy' => 'event_type', 'hide_empty' => false));
