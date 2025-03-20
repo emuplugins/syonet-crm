@@ -1,5 +1,6 @@
 <?php
 
+if ( ! defined('ABSPATH')) exit;
 
 function syonet_form_shortcode($atts) {
     // Extrai o ID do post a partir dos atributos do shortcode
