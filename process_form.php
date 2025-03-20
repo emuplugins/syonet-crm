@@ -18,18 +18,21 @@ function mpf_save_form() {
 
     $post_id = $_POST['post_id'] ?? NULL;
     
-    $contact_preference = isset($_POST['contact_preference']) ? $_POST['contact_preference'] : 'Nenhum';
-    $days_to_update = isset($_POST['days_to_update']) ? $_POST['days_to_update'] : 0;
-    $rules = isset($_POST['rules']) ? $_POST['rules'] : FALSE;
-    $additional_fields = isset($_POST['additional_fields']) ? $_POST['additional_fields'] : null;
-    $update_data = $_POST['update_data'] ?? NULL;
-    $company = $_POST['company'];
+    $contact_preference = isset($_POST['contact_preference']) ? sanitize_text_field($_POST['contact_preference']) : 'Nenhum';
+    $days_to_update = isset($_POST['days_to_update']) ? intval($_POST['days_to_update']) : 0;
+    $rules = isset($_POST['rules']) ? filter_var($_POST['rules'], FILTER_VALIDATE_BOOLEAN) : false;
+    $additional_fields = isset($_POST['additional_fields']) ? array_map('sanitize_text_field', (array) $_POST['additional_fields']) : null;
+    $update_data = isset($_POST['update_data']) ? sanitize_textarea_field($_POST['update_data']) : null;
+    
+    $company = isset($_POST['company']) ? sanitize_text_field($_POST['company']) : null;
     $company = explode(',', $company);
-    $companyID = $company[0] ?? NULL;
-    $companyName = $company[1] ?? NULL; 
-    $event_type = wp_get_post_terms($post_id, 'event_type');
-    $event_group = wp_get_post_terms($post_id, 'event_group');
+    $companyID = isset($company[0]) ? intval($company[0]) : null;
+    $companyName = isset($company[1]) ? sanitize_text_field($company[1]) : null;
+
+    $event_type = !empty($post_id) ? array_map('sanitize_text_field', wp_get_post_terms($post_id, 'event_type', ['fields' => 'names'])) : [];
+    $event_group = !empty($post_id) ? array_map('sanitize_text_field', wp_get_post_terms($post_id, 'event_group', ['fields' => 'names'])) : [];
     $originalEvent = null;
+
 
     // filtrando termos
     $event_type = wp_list_pluck($event_type, 'name'); // tipos de evento
