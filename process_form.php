@@ -29,8 +29,9 @@ function mpf_save_form() {
     $companyID = isset($company[0]) ? intval($company[0]) : null;
     $companyName = isset($company[1]) ? sanitize_text_field($company[1]) : null;
 
-    $event_type = !empty($post_id) ? array_map('sanitize_text_field', wp_get_post_terms($post_id, 'event_type', ['fields' => 'names'])) : [];
-    $event_group = !empty($post_id) ? array_map('sanitize_text_field', wp_get_post_terms($post_id, 'event_group', ['fields' => 'names'])) : [];
+    $event_type = wp_get_post_terms($post_id, 'event_type') ?? '';
+    $event_group = wp_get_post_terms($post_id, 'event_group') ?? '';
+    
     $originalEvent = null;
 
 
