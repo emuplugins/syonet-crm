@@ -1,5 +1,7 @@
 <?php
 
+if ( ! defined('ABSPATH')) exit;
+
 // Adiciona o conteúdo após o título do post
 add_action('edit_form_after_title', 'add_event_group_after_title');
 
