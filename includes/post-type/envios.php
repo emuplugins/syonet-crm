@@ -1,5 +1,7 @@
 <?php 
 
+if ( ! defined('ABSPATH')) exit;
+
 add_action('edit_form_after_title', 'mpf_render_syonet_submissions_metabox');
 
 // Renderiza o metabox
