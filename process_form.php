@@ -1,6 +1,6 @@
 <?php
 
-if(!defined('ABSPATH')exit;
+if ( ! defined('ABSPATH')) exit;
 
 require_once('includes/functions/api_consumer.php');
 require_once FORMULARIO_SYONET_DIR . 'includes/classes/form-fields.php';
