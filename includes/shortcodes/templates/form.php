@@ -2,11 +2,6 @@
 
 if ( ! defined('ABSPATH')) exit;
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
-
 // SHORTCODE ATTRIBUTES
 $atts = shortcode_atts(array(
     'id' => '',
@@ -15,7 +10,6 @@ $atts = shortcode_atts(array(
     'submit_text' => '',
     'subtitle' => ''
 ), $atts);
-
 
 // ELEMENTOR 
 $post_id = $atts['id'];
@@ -32,7 +26,6 @@ $phone_types = get_option('syonet_phone_type');
 $source = get_option('syonet_source');
 $media = get_option('syonet_media');
 $contact_preference = get_option('syonet_contact_preference');
-
 
 // Gerador de passos e campos
 
