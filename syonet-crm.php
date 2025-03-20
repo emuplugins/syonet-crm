@@ -6,6 +6,8 @@
  * Author: Tonny Santana
  */
 
+if(!defined('ABSPATH') exit;
+
 // Código do plugin vai aqui
 define('FORMULARIO_SYONET_DIR', plugin_dir_path(__FILE__));
 define('FORMULARIO_SYONET_URL', plugin_dir_url(__FILE__) . '/');
