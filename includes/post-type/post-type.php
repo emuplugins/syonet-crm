@@ -1,5 +1,7 @@
 <?php 
 
+if ( ! defined('ABSPATH')) exit;
+
 // Adiciona o Custom Post Type
 add_action('init', 'mpf_register_syonet_form_post_type');
 add_action('init', 'mpf_register_syonet_submissions');
