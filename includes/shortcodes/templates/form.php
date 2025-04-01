@@ -352,7 +352,7 @@ $steps =  [
 ?>
 
 
-<form class="form-wizard" action="<?php echo admin_url('admin-ajax.php'); ?>" method="POST" style="width: 100%;">
+<form class="form-wizard" action="<?php echo admin_url('admin-ajax.php'); ?>" method="POST" style="width: 100%;" onsubmit="window.location.href='/obrigado'">
     <input type="hidden" name="action" value="mpf_save_form">
     <input type="hidden" name="nonce" value="<?php echo wp_create_nonce('mpf_save_form_nonce'); ?>">
     <input type="hidden" name="post_id" value="<?php echo $post_id; ?>">
