@@ -152,7 +152,7 @@ function add_event_group_after_title($post) {
             </select>
         </div>
 
-        <div class="thankYouPage-wrapper" style="display:grid; grid-template-columns: 0.5fr 1fr; gap:10px; align-items:center;">
+        <div class="thankYouPage-wrapper" style="display:grid; grid-template-columns: 0.5fr 1fr; gap:10px; align-items:center; margin-top:10px;">
 
             <label for="thankYouPage" style="font-weight:bold;">Página de obrigado</label>
 
@@ -161,7 +161,7 @@ function add_event_group_after_title($post) {
             (https://site.com/minha-pagina == /minha-pagina)</div>
 
         </div>
-        
+
         <p id="event_type_message" style="color: red; display: none; text-align:left;"></p>
 
         
