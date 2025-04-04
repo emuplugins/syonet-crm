@@ -373,11 +373,11 @@ function save_event_group_meta_box($post_id) {
     }
 
     // Salva e relaciona a página de obrigado
-    if (isset($_POST['thankYouPage'])) {
-        $thankYouPage = array_map('intval', (array) $_POST['thankYouPage']); // Garante um array de inteiros
-
-        update_post_meta($post_id, 'thankYouPage', $thankYouPage); // Salva o array de IDs no post meta
+    if (!empty($_POST['thankYouPage'])) {
+        $thankYouPage = sanitize_text_field($_POST['thankYouPage']); // Garante que seja uma string segura
+        update_post_meta($post_id, 'thankYouPage', $thankYouPage); // Salva como string no banco
     }
+
 
     // Salva e relaciona a empresa_taxonomy selecionada ao post
     if (isset($_POST['empresa'])) {
