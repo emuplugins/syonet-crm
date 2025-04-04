@@ -156,7 +156,7 @@ function add_event_group_after_title($post) {
 
             <label for="thankYouPage" style="font-weight:bold;">Página de obrigado</label>
 
-            <input type="text" name="thankYouPage" id="thankYouPage" placeholder="Insira o link aqui">
+            <input type="text" name="thankYouPage" id="thankYouPage" placeholder="Insira o link aqui" style="text-align: left;">
             <div style="grid-column:span 2; text-align:left">Para corresponder ao URL do site, comece a partir do caminho de navegação <br><br>
             (https://site.com/minha-pagina == /minha-pagina)</div>
 
