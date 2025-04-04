@@ -119,7 +119,13 @@ function add_event_group_after_title($post) {
         
 
 
-        
+        <div class="thankYouPage-wrapper">
+
+            <label for="thankYouPage">Página de obrigado (URL)</label>
+            <input type="text" name="thankYouPage" id="thankYouPage" placeholder="Insira o link aqui">
+            <div>Para corresponder ao url principal do site, comece a partir do caminho de navegação (https://site.com/minha-pagina == /minha-pagina)</div>
+
+        </div>
 
         <div class="empresa-container fade-in" style="display:flex; flex-direction:column; gap:10px; margin-bottom:20px; justify-content:flex-start; align-items:flex-start;">
                 <label style="font-weight:bold;">Empresas:</label>
@@ -365,6 +371,13 @@ function save_event_group_meta_box($post_id) {
             // Se nenhum event_type for selecionado, remove todos os termos
             wp_set_object_terms($post_id, array(), 'event_type');
         }
+    }
+
+    // Salva e relaciona a página de obrigado
+    if (isset($_POST['thankYouPage'])) {
+        $thankYouPage = array_map('intval', (array) $_POST['thankYouPage']); // Garante um array de inteiros
+
+        update_post_meta($post_id, 'thankYouPage', $thankYouPage); // Salva o array de IDs no post meta
     }
 
     // Salva e relaciona a empresa_taxonomy selecionada ao post
