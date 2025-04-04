@@ -114,18 +114,6 @@ function add_event_group_after_title($post) {
         
         </div>
     
-        
-
-        
-
-
-        <div class="thankYouPage-wrapper">
-
-            <label for="thankYouPage">Página de obrigado (URL)</label>
-            <input type="text" name="thankYouPage" id="thankYouPage" placeholder="Insira o link aqui">
-            <div>Para corresponder ao url principal do site, comece a partir do caminho de navegação (https://site.com/minha-pagina == /minha-pagina)</div>
-
-        </div>
 
         <div class="empresa-container fade-in" style="display:flex; flex-direction:column; gap:10px; margin-bottom:20px; justify-content:flex-start; align-items:flex-start;">
                 <label style="font-weight:bold;">Empresas:</label>
@@ -163,6 +151,17 @@ function add_event_group_after_title($post) {
                 <?php endif; ?>
             </select>
         </div>
+
+        <div class="thankYouPage-wrapper" style="display:grid; grid-template-columns: 0.5fr 1fr; gap:10px; align-items:center;">
+
+            <label for="thankYouPage" style="font-weight:bold;">Página de obrigado</label>
+
+            <input type="text" name="thankYouPage" id="thankYouPage" placeholder="Insira o link aqui">
+            <div style="grid-column:span 2; text-align:left">Para corresponder ao URL do site, comece a partir do caminho de navegação <br><br>
+            (https://site.com/minha-pagina == /minha-pagina)</div>
+
+        </div>
+        
         <p id="event_type_message" style="color: red; display: none; text-align:left;"></p>
 
         
