@@ -354,33 +354,13 @@ $steps =  [
 ?>
 
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-<script>
-    function validarFormulario(e) {
-        var resposta = grecaptcha.getResponse();
-        if (resposta.length === 0) {
-            alert("Por favor, confirme que você não é um robô.");
-            return false;
-        }
-        const thankYou =  e.target.getAttribute('data-thankyou'); 
-        
-        if(thankYou){
-            window.location.href = thankYou;
-        }
 
-        return false;
+<form id="syonet-form" class="form-wizard" action="<?php echo admin_url('admin-ajax.php'); ?>" method="POST" style="width: 100%;"
+    <?php
+    if (!empty($thankYouPage) && is_string($thankYouPage)) {
+        echo 'data-thankyou="'.esc_url($thankYouPage) . '"';
     }
-</script>
-
-
-
-
-<form id="syonet-form" class="form-wizard" action="<?php echo admin_url('admin-ajax.php'); ?>" method="POST" style="width: 100%;" data-thankyou="<?php
-        if (!empty($thankYouPage) && is_string($thankYouPage)) {
-            echo esc_url($thankYouPage);
-        } else {
-            echo '/obrigado';
-        }
-        ?>">
+    ?>>
     <input type="hidden" name="action" value="mpf_save_form">
     <input type="hidden" name="nonce" value="<?php echo wp_create_nonce('mpf_save_form_nonce'); ?>">
     <input type="hidden" name="post_id" value="<?php echo $post_id; ?>">
