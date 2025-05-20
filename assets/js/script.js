@@ -161,10 +161,6 @@ document.addEventListener('DOMContentLoaded', () => {
             submitButton.disabled = true;
             submitButton.textContent = "Enviando...";
 
-            console.log(Object.fromEntries(formData));
-
-
-
             // Simula uma requisição ao servidor
             setTimeout(() => {
                 form.querySelector('.completed').style.setProperty('display', 'block', 'important'); // Exibe a mensagem de sucesso
@@ -207,14 +203,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
 
                     if (thankYou) {
-                        window.location.href = thankYou;
+                        // window.location.href = thankYou;
+                        console.log(thankYou)
                     }
 
                     return response.json(); // Certifique-se de que você está esperando um JSON
                 })
                 .catch(error => {
                     console.error("Erro na requisição:", error);
-                    window.location.reload(true);
                     alert("Erro ao enviar os dados: " + error.message);
                 });
         });
