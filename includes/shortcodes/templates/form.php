@@ -361,14 +361,11 @@ $steps =  [
             alert("Por favor, confirme que você não é um robô.");
             return false;
         }
-
-        <?php
-        if (!empty($thankYouPage) && is_string($thankYouPage)) {
-            echo 'window.location.href = "' . esc_url($thankYouPage) . '";';
-        } else {
-            echo 'window.location.href = "/obrigado";';
+        const thankYou =  e.target.getAttribute('data-thankyou'); 
+        
+        if(thankYou){
+            window.location.href = thankYou;
         }
-        ?>
 
         return false;
     }
@@ -377,7 +374,13 @@ $steps =  [
 
 
 
-<form id="syonet-form" class="form-wizard" action="<?php echo admin_url('admin-ajax.php'); ?>" method="POST" style="width: 100%;" onsubmit="return validarFormulario(event);">
+<form id="syonet-form" class="form-wizard" action="<?php echo admin_url('admin-ajax.php'); ?>" method="POST" style="width: 100%;" data-thankyou="<?php
+        if (!empty($thankYouPage) && is_string($thankYouPage)) {
+            echo esc_url($thankYouPage);
+        } else {
+            echo '/obrigado';
+        }
+        ?>">
     <input type="hidden" name="action" value="mpf_save_form">
     <input type="hidden" name="nonce" value="<?php echo wp_create_nonce('mpf_save_form_nonce'); ?>">
     <input type="hidden" name="post_id" value="<?php echo $post_id; ?>">

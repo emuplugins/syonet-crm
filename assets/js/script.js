@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
         stepIndicators.forEach((indicator, index) => {
             indicator.classList.toggle('current', currentStep === index);
             indicator.classList.toggle('done', currentStep > index);
-            
+
             // Altera o z-index, position e opacity do passo atual
             steps[index].style.zIndex = currentStep === index ? '1' : '0';
             steps[index].style.position = currentStep === index ? 'relative' : 'absolute';
@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (focusedStep !== -1 && focusedStep !== currentStep) {
 
-            if(!isValidStep()) return;
+            if (!isValidStep()) return;
 
             currentStep = focusedStep;
             updateProgress();
@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
         stepsContainer.scrollTop = 0;
         stepsContainer.scrollLeft = 0;
     })
-);
+    );
 
     if (prevButton) {
         prevButton.addEventListener('click', (e) => {
@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
         nextButton.addEventListener('click', (e) => {
             e.preventDefault();
 
-            if  (!isValidStep()) return;
+            if (!isValidStep()) return;
 
             if (currentStep < stepIndicators.length - 1) {
                 currentStep++;
@@ -101,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
         submitButton.addEventListener('click', (e) => {
             // e.preventDefault();
             // if (!isValidStep()) return;
-           
+
         });
     }
 
@@ -131,20 +131,30 @@ document.addEventListener('DOMContentLoaded', () => {
             return true; // Permite o envio do formulário
         }
 
-        form.addEventListener("submit", function(event) {
+        const form = document.getElementById('syonet-form');
+
+        form.addEventListener("submit", function (event) {
             event.preventDefault();
+
             const phoneField = document.getElementById('phone');
 
+            // Validação geral do formulário (função externa)
             if (!validateForm()) {
                 console.log("Validação falhou, impedindo envio."); // Para depuração
-                event.preventDefault(); // Impede o envio se a validação falhar
                 phoneField.focus();
                 updateProgress();
-                
                 return false;
-                
-          
             }
+
+            // Validação do reCAPTCHA
+            var resposta = grecaptcha.getResponse();
+            if (resposta.length === 0) {
+                alert("Por favor, confirme que você não é um robô.");
+                return false;
+            }
+
+            // Se tudo ok, redireciona para a página de agradecimento
+            const thankYou = form.getAttribute('data-thankyou');
 
             const formData = new FormData(form);
 
@@ -153,14 +163,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
             console.log(Object.fromEntries(formData));
 
-            
 
-                // Simula uma requisição ao servidor
+
+            // Simula uma requisição ao servidor
             setTimeout(() => {
                 form.querySelector('.completed').style.setProperty('display', 'block', 'important'); // Exibe a mensagem de sucesso
                 form.reset(); // Reseta o formulário
                 // Oculta o formulário e o título após o envio
-                form.querySelector('.steps-container').style.display = 'none'; 
+                form.querySelector('.steps-container').style.display = 'none';
                 form.querySelector('.title').style.display = 'none'; // Oculta o título
                 form.querySelector('.progress-container').style.display = 'none';
                 form.querySelector('.controls').style.display = 'none';
@@ -191,18 +201,24 @@ document.addEventListener('DOMContentLoaded', () => {
                 method: "POST",
                 body: formData
             })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`Erro HTTP: ${response.status}`);
-                }
-                return response.json(); // Certifique-se de que você está esperando um JSON
-            })
-            .catch(error => {
-                console.error("Erro na requisição:", error);
-                alert("Erro ao enviar os dados: " + error.message);
-            });
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`Erro HTTP: ${response.status}`);
+                    }
+
+                    if (thankYou) {
+                        window.location.href = thankYou;
+                    }
+
+                    return response.json(); // Certifique-se de que você está esperando um JSON
+                })
+                .catch(error => {
+                    console.error("Erro na requisição:", error);
+                    window.location.reload(true);
+                    alert("Erro ao enviar os dados: " + error.message);
+                });
         });
     }
 
-    });
-    
+});
+
