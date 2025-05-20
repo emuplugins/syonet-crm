@@ -355,15 +355,16 @@ $steps =  [
 
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <script>
-    grecaptcha.ready(function() {
-        grecaptcha.execute('6LfdJP0qAAAAAKkEyLb0goEc3cjmLWw10OF5_Qu7', {
-            action: 'submit'
-        }).then(function(token) {
-            document.getElementById('grecaptcha').value = token;
-            document.getElementById('syonet-form').submit();
-        });
+    document.getElementById('syonet-form').addEventListener('submit', function(e) {
+        var resposta = grecaptcha.getResponse();
+        if (resposta.length === 0) {
+            e.preventDefault();
+            alert("Por favor, confirme que você não é um robô.");
+        }
     });
 </script>
+
+
 
 <form id="syonet-form" class="form-wizard" action="<?php echo admin_url('admin-ajax.php'); ?>" method="POST" style="width: 100%;"
     <?php
