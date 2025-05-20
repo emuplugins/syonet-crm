@@ -1,11 +1,24 @@
 <?php
 
-if ( ! defined('ABSPATH')) exit;
+if (! defined('ABSPATH')) exit;
 
 require_once('includes/functions/api_consumer.php');
 require_once FORMULARIO_SYONET_DIR . 'includes/classes/form-fields.php';
 
-function mpf_save_form() {
+
+function generateE164Number($ddi, $ddd, $phone)
+{
+    $phone = preg_replace('/\D/', '', $phone);
+
+    if (!empty($ddi) && !empty($ddd) && !empty($phone)) {
+        // Retorna o número no formato E.164
+        return '+' . $ddi . $phone; // O DDI já inclui o código do país
+    }
+    return null; // Retorna null se os dados não forem válidos
+}
+
+function mpf_save_form()
+{
     global $wpdb;
     $username = get_option('syonet_username');
     $password = get_option('syonet_password');
@@ -13,17 +26,15 @@ function mpf_save_form() {
 
     // Verifica nonce 
     check_ajax_referer('mpf_save_form_nonce', 'nonce');
-    
-    error_log('Dados recebidos: ' . print_r($_POST, true));
 
     $post_id = $_POST['post_id'] ?? NULL;
-    
+
     $contact_preference = isset($_POST['contact_preference']) ? sanitize_text_field($_POST['contact_preference']) : 'Nenhum';
     $days_to_update = isset($_POST['days_to_update']) ? intval($_POST['days_to_update']) : 0;
     $rules = isset($_POST['rules']) ? filter_var($_POST['rules'], FILTER_VALIDATE_BOOLEAN) : false;
     $additional_fields = isset($_POST['additional_fields']) ? array_map('sanitize_text_field', (array) $_POST['additional_fields']) : null;
     $update_data = isset($_POST['update_data']) ? sanitize_textarea_field($_POST['update_data']) : null;
-    
+
     $company = isset($_POST['company']) ? sanitize_text_field($_POST['company']) : null;
     $company = explode(',', $company);
     $companyID = isset($company[0]) ? intval($company[0]) : null;
@@ -31,9 +42,8 @@ function mpf_save_form() {
 
     $event_type = wp_get_post_terms($post_id, 'event_type') ?? '';
     $event_group = wp_get_post_terms($post_id, 'event_group') ?? '';
-    
-    $originalEvent = null;
 
+    $originalEvent = null;
 
     // filtrando termos
     $event_type = wp_list_pluck($event_type, 'name'); // tipos de evento
@@ -41,17 +51,28 @@ function mpf_save_form() {
 
     $event_type = !empty($event_type) ? $event_type[0] : '';
     $event_group = !empty($event_group) ? $event_group[0] : '';
-    
-    function generateE164Number($ddi, $ddd, $phone) {
 
-        $phone = preg_replace('/\D/', '', $phone);
-        
-        if (!empty($ddi) && !empty($ddd) && !empty($phone)) {
-            // Retorna o número no formato E.164
-            return '+' . $ddi . $phone; // O DDI já inclui o código do país
-        }
-        return null; // Retorna null se os dados não forem válidos
+    
+
+
+
+
+    $grecaptcha = $_POST['grecaptcha'] ?? null;
+
+    if (!$grecaptcha) {
+        exit('reCAPTCHA não enviado.');
     }
+
+    $secretKey = '6LfdJP0qAAAAALKnl2m_II3PahoyZw3Jq_rqstvl'; 
+
+    $response = file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret=' . $secretKey . '&response=' . $grecaptcha);
+    $responseData = json_decode($response, true);
+
+    if (!$responseData['success']) {
+        return;
+    }
+
+
 
     $e164Number = generateE164Number(intval($_POST['ddi'] ?? 0), intval($_POST['ddd'] ?? 0), preg_replace('/\D/', '', $_POST['phone'] ?? ''));
 
@@ -140,10 +161,10 @@ function mpf_save_form() {
         ];
 
         $payload = new RequestPayload(
-            $customer, 
-            $event, 
-            $data['daysToUpdateOpenEvent'] ?? NULL, 
-            $data['rules']['updateMainEmailPhone'] ?? NULL, 
+            $customer,
+            $event,
+            $data['daysToUpdateOpenEvent'] ?? NULL,
+            $data['rules']['updateMainEmailPhone'] ?? NULL,
             $additionalFields
         );
 
@@ -198,12 +219,11 @@ function mpf_save_form() {
         foreach ($data_to_insert as $meta_key => $meta_value) {
             update_post_meta($post_id, $meta_key, $meta_value);
         }
-        
+
         wp_send_json_success([
             'message' => 'Dados salvos e enviados com sucesso!',
             'api_data' => $jsonData
         ]);
-
     } catch (Exception $e) {
         wp_send_json_error('Erro no processamento: ' . $e->getMessage());
     }

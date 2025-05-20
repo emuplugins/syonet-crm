@@ -1,6 +1,6 @@
 <?php
 
-if ( ! defined('ABSPATH')) exit;
+if (! defined('ABSPATH')) exit;
 
 // SHORTCODE ATTRIBUTES
 $atts = shortcode_atts(array(
@@ -27,7 +27,7 @@ $source = get_option('syonet_source');
 $media = get_option('syonet_media');
 $contact_preference = get_option('syonet_contact_preference');
 
-$thankYouPage = get_post_meta( $post_id, 'thankYouPage', true ) ?? '';
+$thankYouPage = get_post_meta($post_id, 'thankYouPage', true) ?? '';
 
 // Gerador de passos e campos
 
@@ -39,7 +39,7 @@ $thankYouPage = get_post_meta( $post_id, 'thankYouPage', true ) ?? '';
 
 // Antes de usar um term_object, você precisa converter para um array com get_object_vars.
 
-$empresas = array_map(function($empresa) {
+$empresas = array_map(function ($empresa) {
     return [
         'value' => get_term_meta($empresa->term_id, 'empresa_id', true),
         'name'  => $empresa->name
@@ -198,7 +198,7 @@ $veiculos = [
 
 $steps =  [
 
-// STEP
+    // STEP
 
     'Contato' => [
         'name' => [
@@ -238,81 +238,81 @@ $steps =  [
         //     'type' => 'select',
         //     'options' => $media
         // ]
-    // ],
+        // ],
 
-// // STEP
+        // // STEP
 
-//     'Documentos' => [
-//         'document' => [
-//             'label' => 'Documento',
-//             'required' => true,
-//             'type' => 'text',
-//             'placeholder' => '999.999.999-99'
-//         ],
-//         'document_type' => [
-//             'label' => 'Tipo de documento',
-//             'required' => true,
-//             'type' => 'select',
-//             'options' => $document_types
-//         ],
-//         'person_type' => [
-//             'label' => 'Tipo de pessoa',
-//             'required' => true,
-//             'type' => 'select',
-//             'options' => $person_types
-//         ]
-//     ],
+        //     'Documentos' => [
+        //         'document' => [
+        //             'label' => 'Documento',
+        //             'required' => true,
+        //             'type' => 'text',
+        //             'placeholder' => '999.999.999-99'
+        //         ],
+        //         'document_type' => [
+        //             'label' => 'Tipo de documento',
+        //             'required' => true,
+        //             'type' => 'select',
+        //             'options' => $document_types
+        //         ],
+        //         'person_type' => [
+        //             'label' => 'Tipo de pessoa',
+        //             'required' => true,
+        //             'type' => 'select',
+        //             'options' => $person_types
+        //         ]
+        //     ],
 
-// // STEP
+        // // STEP
 
-//     'Endereço' => [
-//         'country' => [
-//             'label' => 'País',
-//             'required' => true,
-//             'type' => 'text',
-//             'placeholder' => 'Brasil'
-//         ],
-//         'postcode' => [
-//             'label' => 'CEP',
-//             'required' => true,
-//             'type' => 'text',
-//             'placeholder' => '00000-000'
-//         ],
-//         'address_number' => [
-//             'label' => 'Número',
-//             'required' => true,
-//             'type' => 'text',
-//             'placeholder' => '144'
-//         ],
-//         'state' => [
-//             'label' => 'Estado',
-//             'required' => true,
-//             'type' => 'text',
-//             'placeholder' => 'SP'
-//         ],
-//         'city' => [
-//             'label' => 'Cidade',
-//             'required' => true,
-//             'type' => 'text',
-//             'placeholder' => 'São Paulo'
-//         ],
-//         'neighborhood' => [
-//             'label' => 'Bairro',
-//             'required' => true,
-//             'type' => 'text',
-//             'placeholder' => 'Novo Paraíso'
-//         ],
-//         'address' => [
-//             'label' => 'Endereço',
-//             'required' => true,
-//             'type' => 'text',
-//             'placeholder' => 'Rua das Flores'
-//         ]
-//     ],
+        //     'Endereço' => [
+        //         'country' => [
+        //             'label' => 'País',
+        //             'required' => true,
+        //             'type' => 'text',
+        //             'placeholder' => 'Brasil'
+        //         ],
+        //         'postcode' => [
+        //             'label' => 'CEP',
+        //             'required' => true,
+        //             'type' => 'text',
+        //             'placeholder' => '00000-000'
+        //         ],
+        //         'address_number' => [
+        //             'label' => 'Número',
+        //             'required' => true,
+        //             'type' => 'text',
+        //             'placeholder' => '144'
+        //         ],
+        //         'state' => [
+        //             'label' => 'Estado',
+        //             'required' => true,
+        //             'type' => 'text',
+        //             'placeholder' => 'SP'
+        //         ],
+        //         'city' => [
+        //             'label' => 'Cidade',
+        //             'required' => true,
+        //             'type' => 'text',
+        //             'placeholder' => 'São Paulo'
+        //         ],
+        //         'neighborhood' => [
+        //             'label' => 'Bairro',
+        //             'required' => true,
+        //             'type' => 'text',
+        //             'placeholder' => 'Novo Paraíso'
+        //         ],
+        //         'address' => [
+        //             'label' => 'Endereço',
+        //             'required' => true,
+        //             'type' => 'text',
+        //             'placeholder' => 'Rua das Flores'
+        //         ]
+        //     ],
 
-// // STEP
+        // // STEP
 
-//     'Conclusão' => [
+        //     'Conclusão' => [
         'company' => [
             'label' => 'Concessionária',
             'required' => true,
@@ -327,182 +327,194 @@ $steps =  [
             'options' => $veiculos,
             'placeholder' => 'Escolher opção'
         ],
-//         'contact_preference' => [
-//             'label' => 'Preferência de contato',
-//             'required' => true,
-//             'type' => 'select',
-//             'options' => $contact_preference
-//         ],
-//         'update_data' => [
-//             'label' => 'Atualizar dados? (Se já é cliente)',
-//             'required' => true,
-//             'type' => 'boolean',
-//             'options' => [
-//                 'Sim',
-//                 'Não'
-//             ]
-//         ],
-//         'comment' => [
-//             'label' => 'Comentário',
-//             'required' => true,
-//             'type' => 'textarea',
-//             'placeholder' => 'Descreva seu interesse.'
-//         ]
-//     ]
-]
-    ];
+        //         'contact_preference' => [
+        //             'label' => 'Preferência de contato',
+        //             'required' => true,
+        //             'type' => 'select',
+        //             'options' => $contact_preference
+        //         ],
+        //         'update_data' => [
+        //             'label' => 'Atualizar dados? (Se já é cliente)',
+        //             'required' => true,
+        //             'type' => 'boolean',
+        //             'options' => [
+        //                 'Sim',
+        //                 'Não'
+        //             ]
+        //         ],
+        //         'comment' => [
+        //             'label' => 'Comentário',
+        //             'required' => true,
+        //             'type' => 'textarea',
+        //             'placeholder' => 'Descreva seu interesse.'
+        //         ]
+        //     ]
+    ]
+];
 ?>
 
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<script>
+    grecaptcha.ready(function() {
+        grecaptcha.execute('6LfdJP0qAAAAAKkEyLb0goEc3cjmLWw10OF5_Qu7', {
+            action: 'submit'
+        }).then(function(token) {
+            document.getElementById('grecaptcha').value = token;
+            document.getElementById('syonet-form').submit();
+        });
+    });
+</script>
 
-<form class="form-wizard" action="<?php echo admin_url('admin-ajax.php'); ?>" method="POST" style="width: 100%;"
-    <?php 
+<form id="syonet-form" class="form-wizard" action="<?php echo admin_url('admin-ajax.php'); ?>" method="POST" style="width: 100%;"
+    <?php
     if (!empty($thankYouPage) && is_string($thankYouPage)) {
         echo 'onsubmit="window.location.href=\'' . esc_url($thankYouPage) . '\'"';
-    } 
+    }
     ?>>
     <input type="hidden" name="action" value="mpf_save_form">
     <input type="hidden" name="nonce" value="<?php echo wp_create_nonce('mpf_save_form_nonce'); ?>">
     <input type="hidden" name="post_id" value="<?php echo $post_id; ?>">
 
     <h3 class="title">
-            <?php if (!empty($logo)) echo '<img class="syonet-logo-form" src="'. $logo . '" alt="SyoNet" style="height: auto;">';
-            if (!empty($title)) echo '<span class="syonet-form-title">' . $title . '</span>';
-            if (!empty($subtitle)) echo '<span class="syonet-form-subtitle">' . $subtitle . '</span>'; ?>
-        </h3>
+        <?php if (!empty($logo)) echo '<img class="syonet-logo-form" src="' . $logo . '" alt="SyoNet" style="height: auto;">';
+        if (!empty($title)) echo '<span class="syonet-form-title">' . $title . '</span>';
+        if (!empty($subtitle)) echo '<span class="syonet-form-subtitle">' . $subtitle . '</span>'; ?>
+    </h3>
 
-        <div class="completed" hidden>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.746 3.746 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.746 3.746 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z" />
-            </svg>
-            <h3>Formulário enviado com sucesso!</h3>
-            <p>Obrigado por entrar em contato conosco.</p>
-        </div>
+    <div class="completed" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.746 3.746 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.746 3.746 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z" />
+        </svg>
+        <h3>Formulário enviado com sucesso!</h3>
+        <p>Obrigado por entrar em contato conosco.</p>
+    </div>
 
-        <?php $step_keys = array_keys($steps);?>
-        
-        
-            <div class="progress-container" style="<?php echo (count($steps) <= 1) ? 'display: none!important;' : ''; ?>">
-                <div class="progress"></div>
-                <ol>
-                    <?php foreach (array_keys($steps) as $index => $step): ?>
-                        <li class="<?php echo $index == 0 ? 'current' : ''; ?>"><?php echo $step; ?></li>
-                    <?php endforeach; ?>
-                </ol>
-            </div>
-        
+    <?php $step_keys = array_keys($steps); ?>
 
-        
-        <div class="steps-container">
 
-        <?php 
-        
+    <div class="progress-container" style="<?php echo (count($steps) <= 1) ? 'display: none!important;' : ''; ?>">
+        <div class="progress"></div>
+        <ol>
+            <?php foreach (array_keys($steps) as $index => $step): ?>
+                <li class="<?php echo $index == 0 ? 'current' : ''; ?>"><?php echo $step; ?></li>
+            <?php endforeach; ?>
+        </ol>
+    </div>
+
+
+
+    <div class="steps-container">
+
+        <?php
+
         foreach ($steps as $step => $fields): ?>
             <div class="step <?php echo ($index == 0) ? 'first-step' : ''; ?>" style="<?php echo ($index == 0) ? 'position: relative;' : ''; ?>">
-                <?php 
+                <?php
                 $index = 0;
-                
+
                 foreach ($fields as $field => $details): ?>
                     <?php if ($index % 2 == 0): ?> <!-- Verificando se o índice é par -->
                         <div class="form-group">
-                    <?php endif; ?>
-        
-                    <div class="form-control-syonet">
-                        <?php if ($details['type'] == 'text'): ?>
-                            <label for="<?php echo $field; ?>"><?php echo $details['label']; ?></label>
-                            <input type="text" name="<?php echo $field; ?>" id="<?php echo $field; ?>" <?php echo $details['required'] ? 'required' : ''; ?> placeholder="<?php echo $details['label']; ?>">
                         <?php endif; ?>
-        
-                        <?php if ($details['type'] == 'email'): ?>
-                            <label for="<?php echo $field; ?>"><?php echo $details['label']; ?></label>
-                            <input type="email" name="<?php echo $field; ?>" id="<?php echo $field; ?>" <?php echo $details['required'] ? 'required' : ''; ?> placeholder="<?php echo $details['label']; ?>">
-                        <?php endif; ?>
-        
-                        <?php if ($details['type'] == 'tel'): ?>
-                            <div class="form-control-syonet">
-                                <label for="phone" style="width: 100%;">Número de telefone</label>
-        
-                                <div id="search-country-body" style="display: none;">
-                                    <input type="text" id="search_country" class="form-control search-input" placeholder="Buscar país..." onkeyup="filterCountries()" onclick="event.stopPropagation()">
-                                    <div class="dropdown" id="dropdown">
-                                        <div id="country_list"></div>
-                                    </div>
-                                </div>
-        
-                                <input type="text" id="ddi" value="+55" name="ddi" hidden placeholder="DDI" required />
-                                <input type="text" id="ddd" value="11" name="ddd" hidden placeholder="DDD" required />
-        
-                                <div class="phone-input" style="display: flex; align-items: center; flex-wrap: wrap;">
-                                    <div class="custom-select">
-                                        <div class="selected-flag" onclick="toggleDropdown()" tabindex="0" onkeydown="if(event.key === 'Enter') { toggleDropdown(); selectCountry(selectedCountryName, selectedCountryFlag, selectedCountryDdi); }">
-                                            <img id="selected_flag" src="https://cdnjs.cloudflare.com/ajax/libs/flag-icons/7.2.3/flags/4x3/br.svg" alt="" tabindex="-1">
+
+                        <div class="form-control-syonet">
+                            <?php if ($details['type'] == 'text'): ?>
+                                <label for="<?php echo $field; ?>"><?php echo $details['label']; ?></label>
+                                <input type="text" name="<?php echo $field; ?>" id="<?php echo $field; ?>" <?php echo $details['required'] ? 'required' : ''; ?> placeholder="<?php echo $details['label']; ?>">
+                            <?php endif; ?>
+
+                            <?php if ($details['type'] == 'email'): ?>
+                                <label for="<?php echo $field; ?>"><?php echo $details['label']; ?></label>
+                                <input type="email" name="<?php echo $field; ?>" id="<?php echo $field; ?>" <?php echo $details['required'] ? 'required' : ''; ?> placeholder="<?php echo $details['label']; ?>">
+                            <?php endif; ?>
+
+                            <?php if ($details['type'] == 'tel'): ?>
+                                <div class="form-control-syonet">
+                                    <label for="phone" style="width: 100%;">Número de telefone</label>
+
+                                    <div id="search-country-body" style="display: none;">
+                                        <input type="text" id="search_country" class="form-control search-input" placeholder="Buscar país..." onkeyup="filterCountries()" onclick="event.stopPropagation()">
+                                        <div class="dropdown" id="dropdown">
+                                            <div id="country_list"></div>
                                         </div>
                                     </div>
-        
-                                    <input type="text" id="phone" name="phone" placeholder="(99) 99999-9999" <?php echo $details['required'] ? 'required' : ''; ?> style="width: 70%; flex-grow: 1;" oninput="phoneNumberFormatter()" onblur="phoneNumberFormatter()">
-                                </div>
-                            </div>
-                        <?php endif; ?>
-        
-                        <?php if ($details['type'] == 'select'): ?>
-                            <label for="<?php echo $field; ?>"><?php echo $details['label']; ?></label>
-                            <select name="<?php echo $field; ?>" id="<?php echo $field; ?>" <?php echo $details['required'] ? 'required' : ''; ?>>
 
-                                <?php if ($details['placeholder']): ?>
-                                    <option value="">
-                                        Escolha uma opção
-                                    </option>
-                                <?php endif; ?>
-                                <?php foreach ($details['options'] as $option): ?>
-                                    <?php 
-                                    // Verifica se o $option é um objeto WP_Term
-                                    if (is_object($option) && isset($option->term_id)) {
-                                        // Converte o WP_Term object para um array
-                                        $option = get_object_vars($option);
-                                    }
-                                    ?>
-                                    <option value="<?php echo $option['value'] ?? $option['name'] ?? $option['post_name'] ?? ''; ?>">
-                                        <?php echo $option['name'] ?? $option['post_name'] ?? $option['value'] ?? ''; ?>
-                                    </option>
-                                <?php endforeach; ?>
-                            </select>
-                        <?php endif; ?>
-        
-                        <?php if ($details['type'] == 'boolean'): ?>
-                            <label for="<?php echo $field; ?>"><?php echo $details['label']; ?></label>
-                            <select name="<?php echo $field; ?>" id="<?php echo $field; ?>">
-                                <option value="TRUE"><?php echo $details['options'][0]; ?></option>
-                                <option value="FALSE"><?php echo $details['options'][1]; ?></option>
-                            </select>
-                        <?php endif; ?>
-        
-                        <?php if ($details['type'] == 'textarea'): ?>
-                            <label for="<?php echo $field; ?>"><?php echo $details['label']; ?></label>
-                            <div style="display:grid;">
-                                <textarea id="<?php echo $field; ?>" name="<?php echo $field; ?>" placeholder="<?php echo $details['label']; ?>" required></textarea>
-                            </div>
-                        <?php endif; ?>
-                    </div>
-        
-                    <?php if ($index % 2 == 1 || $index == count($fields) - 1): ?> <!-- Fechando a <div> para os índices ímpares ou o último índice -->
+                                    <input type="text" id="ddi" value="+55" name="ddi" hidden placeholder="DDI" required />
+                                    <input type="text" id="ddd" value="11" name="ddd" hidden placeholder="DDD" required />
+
+                                    <div class="phone-input" style="display: flex; align-items: center; flex-wrap: wrap;">
+                                        <div class="custom-select">
+                                            <div class="selected-flag" onclick="toggleDropdown()" tabindex="0" onkeydown="if(event.key === 'Enter') { toggleDropdown(); selectCountry(selectedCountryName, selectedCountryFlag, selectedCountryDdi); }">
+                                                <img id="selected_flag" src="https://cdnjs.cloudflare.com/ajax/libs/flag-icons/7.2.3/flags/4x3/br.svg" alt="" tabindex="-1">
+                                            </div>
+                                        </div>
+
+                                        <input type="text" id="phone" name="phone" placeholder="(99) 99999-9999" <?php echo $details['required'] ? 'required' : ''; ?> style="width: 70%; flex-grow: 1;" oninput="phoneNumberFormatter()" onblur="phoneNumberFormatter()">
+                                    </div>
+                                </div>
+                            <?php endif; ?>
+
+                            <?php if ($details['type'] == 'select'): ?>
+                                <label for="<?php echo $field; ?>"><?php echo $details['label']; ?></label>
+                                <select name="<?php echo $field; ?>" id="<?php echo $field; ?>" <?php echo $details['required'] ? 'required' : ''; ?>>
+
+                                    <?php if ($details['placeholder']): ?>
+                                        <option value="">
+                                            Escolha uma opção
+                                        </option>
+                                    <?php endif; ?>
+                                    <?php foreach ($details['options'] as $option): ?>
+                                        <?php
+                                        // Verifica se o $option é um objeto WP_Term
+                                        if (is_object($option) && isset($option->term_id)) {
+                                            // Converte o WP_Term object para um array
+                                            $option = get_object_vars($option);
+                                        }
+                                        ?>
+                                        <option value="<?php echo $option['value'] ?? $option['name'] ?? $option['post_name'] ?? ''; ?>">
+                                            <?php echo $option['name'] ?? $option['post_name'] ?? $option['value'] ?? ''; ?>
+                                        </option>
+                                    <?php endforeach; ?>
+                                </select>
+                            <?php endif; ?>
+
+                            <?php if ($details['type'] == 'boolean'): ?>
+                                <label for="<?php echo $field; ?>"><?php echo $details['label']; ?></label>
+                                <select name="<?php echo $field; ?>" id="<?php echo $field; ?>">
+                                    <option value="TRUE"><?php echo $details['options'][0]; ?></option>
+                                    <option value="FALSE"><?php echo $details['options'][1]; ?></option>
+                                </select>
+                            <?php endif; ?>
+
+                            <?php if ($details['type'] == 'textarea'): ?>
+                                <label for="<?php echo $field; ?>"><?php echo $details['label']; ?></label>
+                                <div style="display:grid;">
+                                    <textarea id="<?php echo $field; ?>" name="<?php echo $field; ?>" placeholder="<?php echo $details['label']; ?>" required></textarea>
+                                </div>
+                            <?php endif; ?>
+                        </div>
+
+                        <?php if ($index % 2 == 1 || $index == count($fields) - 1): ?> <!-- Fechando a <div> para os índices ímpares ou o último índice -->
                         </div>
                     <?php endif; ?>
-        
+
                     <?php $index++; ?>
                 <?php endforeach; ?>
             </div>
         <?php endforeach; ?>
-        
-        </div>
-        
-        <div class="controls">
-            <?php if ($steps >= 0): ?>
-                <button type="button" class="syonet-prev-btn">Anterior</button>
-                <button type="button" class="syonet-next-btn">Próximo</button>
-            <?php endif; ?>
-            
-            <button type="submit" class="syonet-submit-btn">
-                <?php if (!empty($submit_text)) echo '<span>' . $submit_text . '</span>'; ?>
-            </button>
-        </div>
-        </form>
-        
+
+    </div>
+
+    <div class="controls">
+
+        <div class="g-recaptcha" data-sitekey="SUA_CHAVE_PUBLICA"></div>
+        <?php if ($steps >= 0): ?>
+            <button type="button" class="syonet-prev-btn">Anterior</button>
+            <button type="button" class="syonet-next-btn">Próximo</button>
+        <?php endif; ?>
+
+        <button type="submit" class="syonet-submit-btn">
+            <?php if (!empty($submit_text)) echo '<span>' . $submit_text . '</span>'; ?>
+        </button>
+    </div>
+</form>
