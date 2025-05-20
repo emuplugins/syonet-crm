@@ -57,13 +57,10 @@ function mpf_save_form()
 
 
 
-    $grecaptcha = $_POST['grecaptcha'] ?? null;
-    
-    var_dump($response);
-    exit;
+    $grecaptcha = $_POST['g-recaptcha-response'] ?? null;
 
     if (!$grecaptcha) {
-        exit('reCAPTCHA não enviado.');
+        wp_send_json_error('Recaptcha inválido');
     }
 
     $secretKey = '6LfdJP0qAAAAALKnl2m_II3PahoyZw3Jq_rqstvl';
@@ -72,7 +69,7 @@ function mpf_save_form()
     $responseData = json_decode($response, true);
 
     if (!$responseData['success']) {
-        return;
+       wp_send_json_error('Recaptcha inválido');
     }
 
 
