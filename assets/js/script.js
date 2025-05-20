@@ -110,8 +110,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     if (form) {
-        console.log("Ação do formulário:", form.action); // Verifica se está correto
-
 
         function validateForm() {
             const ddiField = document.getElementById('ddi');
@@ -131,67 +129,36 @@ document.addEventListener('DOMContentLoaded', () => {
             return true; // Permite o envio do formulário
         }
 
-        const form = document.getElementById('syonet-form');
-
         form.addEventListener("submit", function (event) {
             event.preventDefault();
 
             const phoneField = document.getElementById('phone');
 
-            // Validação geral do formulário (função externa)
             if (!validateForm()) {
-                console.log("Validação falhou, impedindo envio."); // Para depuração
                 phoneField.focus();
                 updateProgress();
                 return false;
             }
 
-            // Validação do reCAPTCHA
             var resposta = grecaptcha.getResponse();
-            if (resposta.length === 0 || ! resposta) {
+            if (!resposta || resposta.length === 0) {
                 alert("Por favor, confirme que você não é um robô.");
                 return false;
             }
 
-            // Se tudo ok, redireciona para a página de agradecimento
             const thankYou = form.getAttribute('data-thankyou');
-
             const formData = new FormData(form);
 
             submitButton.disabled = true;
             submitButton.textContent = "Enviando...";
 
-            // Simula uma requisição ao servidor
-            setTimeout(() => {
-                form.querySelector('.completed').style.setProperty('display', 'block', 'important'); // Exibe a mensagem de sucesso
-                form.reset(); // Reseta o formulário
-                // Oculta o formulário e o título após o envio
-                form.querySelector('.steps-container').style.display = 'none';
-                form.querySelector('.title').style.display = 'none'; // Oculta o título
-                form.querySelector('.progress-container').style.display = 'none';
-                form.querySelector('.controls').style.display = 'none';
+            // Adiciona nonce se existir
+            const nonceInput = document.querySelector('input[name="nonce"]');
+            if (nonceInput) {
+                formData.append('nonce', nonceInput.value);
+            }
 
-                // Após 3 segundos, retorna ao início do formulário
-                setTimeout(() => {
-                    form.querySelector('.completed').style.display = 'none'; // Oculta a mensagem de sucesso
-                    form.querySelector('.steps-container').style.display = 'flex'; // Exibe o formulário novamente
-                    form.querySelector('.title').style.display = 'flex'; // Exibe o título novamente
-                    form.querySelector('.progress-container').style.display = 'block';
-                    form.querySelector('.controls').style.display = 'flex';
-                    submitButton.disabled = false; // Reabilita o botão de envio
-                    submitButton.textContent = "Enviar"; // Restaura o texto do botão
-                    nextButton.disabled = false; // Reabilita o botão de envio
-                    nextButton.textContent = "Próximo"; // Restaura o texto do botão
-                    currentStep = 0;
-                    updateProgress();
-                }, 3000);
-            }, 3000);
-
-            // Garantir que o nonce seja incluído, se necessário
-            formData.append('nonce', document.querySelector('input[name="nonce"]').value);
-
-            // Corrigir a URL do formulário
-            const actionUrl = form.getAttribute('action'); // Pega corretamente a URL do atributo action
+            const actionUrl = form.getAttribute('action');
 
             fetch(actionUrl, {
                 method: "POST",
@@ -201,19 +168,50 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (!response.ok) {
                         throw new Error(`Erro HTTP: ${response.status}`);
                     }
+                    return response.json(); // espera JSON
+                })
+                .then(data => {
+                    // Aqui você pode checar a resposta da API, exemplo:
+                    // if (data.success) { ... } else { ... }
 
+                    // Se quiser mostrar mensagem de sucesso na mesma página:
+                    form.querySelector('.completed').style.setProperty('display', 'block', 'important');
+                    form.reset();
+                    form.querySelector('.steps-container').style.display = 'none';
+                    form.querySelector('.title').style.display = 'none';
+                    form.querySelector('.progress-container').style.display = 'none';
+                    form.querySelector('.controls').style.display = 'none';
+
+                    // Redireciona após 3 segundos para a página de obrigado, se tiver
                     if (thankYou) {
-                        // window.location.href = thankYou;
-                        console.log(thankYou)
+                        setTimeout(() => {
+                            window.location.href = thankYou;
+                        }, 3000);
+                    } else {
+                        // Se não tiver thankYou, reabilita o botão após 3 segundos
+                        setTimeout(() => {
+                            form.querySelector('.completed').style.display = 'none';
+                            form.querySelector('.steps-container').style.display = 'flex';
+                            form.querySelector('.title').style.display = 'flex';
+                            form.querySelector('.progress-container').style.display = 'block';
+                            form.querySelector('.controls').style.display = 'flex';
+                            submitButton.disabled = false;
+                            submitButton.textContent = "Enviar";
+                            nextButton.disabled = false;
+                            nextButton.textContent = "Próximo";
+                            currentStep = 0;
+                            updateProgress();
+                        }, 3000);
                     }
-
-                    return response.json(); // Certifique-se de que você está esperando um JSON
                 })
                 .catch(error => {
                     console.error("Erro na requisição:", error);
                     alert("Erro ao enviar os dados: " + error.message);
+                    // Recarrega a página em caso de erro
+                    window.location.reload();
                 });
         });
+
     }
 
 });
