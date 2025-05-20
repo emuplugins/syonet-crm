@@ -507,7 +507,7 @@ $steps =  [
 
     <div class="controls">
 
-        <div class="g-recaptcha" data-sitekey="SUA_CHAVE_PUBLICA"></div>
+        <div class="g-recaptcha" data-sitekey="6LfdJP0qAAAAAKkEyLb0goEc3cjmLWw10OF5_Qu7"></div>
         <?php if ($steps >= 0): ?>
             <button type="button" class="syonet-prev-btn">Anterior</button>
             <button type="button" class="syonet-next-btn">Próximo</button>
