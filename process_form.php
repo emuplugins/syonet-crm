@@ -52,18 +52,21 @@ function mpf_save_form()
     $event_type = !empty($event_type) ? $event_type[0] : '';
     $event_group = !empty($event_group) ? $event_group[0] : '';
 
-    
+
 
 
 
 
     $grecaptcha = $_POST['grecaptcha'] ?? null;
+    
+    var_dump($response);
+    exit;
 
     if (!$grecaptcha) {
         exit('reCAPTCHA não enviado.');
     }
 
-    $secretKey = '6LfdJP0qAAAAALKnl2m_II3PahoyZw3Jq_rqstvl'; 
+    $secretKey = '6LfdJP0qAAAAALKnl2m_II3PahoyZw3Jq_rqstvl';
 
     $response = file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret=' . $secretKey . '&response=' . $grecaptcha);
     $responseData = json_decode($response, true);
