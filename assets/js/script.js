@@ -148,7 +148,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Validação do reCAPTCHA
             var resposta = grecaptcha.getResponse();
-            if (resposta.length === 0) {
+            if (resposta.length === 0 || ! resposta) {
                 alert("Por favor, confirme que você não é um robô.");
                 return false;
             }
