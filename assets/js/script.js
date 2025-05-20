@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    const form = document.querySelector('.form-wizard');
+    const form = document.getElementById('syonet-form');
     const progress = form.querySelector('.progress');
     const stepsContainer = form.querySelector('.steps-container');
     const steps = form.querySelectorAll('.step');
