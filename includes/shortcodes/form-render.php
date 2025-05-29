@@ -9,7 +9,7 @@ function syonet_form_shortcode($atts) {
         'logo' => '',
         'title' => '',
         'submit_text' => '',
-        'subtitle' => ''
+        'subtitle' => '',
         'veiculo' => ''
     ), $atts);
 
