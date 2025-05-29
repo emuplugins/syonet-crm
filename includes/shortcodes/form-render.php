@@ -17,7 +17,7 @@ function syonet_form_shortcode($atts) {
         return 'ID do formulário não fornecido.';
     }
 
-    $veiculo = $atts['veiculo'];
+    $veiculos = $atts['veiculo'];
     
     $form_post = get_post($atts['id']);
 
