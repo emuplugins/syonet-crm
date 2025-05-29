@@ -82,6 +82,15 @@ class Syonet_Form_Widget extends Widget_Base {
 				'default' => '',
 			]
 		);
+
+		$this->add_control(
+			'veiculo',
+			[
+				'label' => __('Escolha o veículo', 'custom-elementor'),
+				'type' => Controls_Manager::TEXT,
+				'placeholder' => esc_html__( 'Deixe vazio para recuperar das opções do site.', 'textdomain' ),
+			]
+		);
 	
 		$this->add_control(
 			'logo',
@@ -783,6 +792,8 @@ class Syonet_Form_Widget extends Widget_Base {
 
     protected function render() {
         $settings = $this->get_settings_for_display();
+
+	$veiculo = $settings['veiculo'] ?? ''; 
         
         if (empty($settings['form_id'])) {
             echo __('<div style="width: 700px; height:300px; display:flex; flex-direction:column; justify-content:center; align-items:center; background-color: #f0f0f0; border-radius: 10px; padding: 20px; font-family: sans-serif; text-align: center;">
@@ -795,7 +806,7 @@ class Syonet_Form_Widget extends Widget_Base {
         }
 
        
-        echo do_shortcode('[syonet_form id="' . esc_attr($settings['form_id']) . '" logo="' . esc_attr($settings['logo']['url']) . '" title="' . esc_attr($settings['form_title']) . '" submit_text="' . esc_attr($settings['form_submit_text']) . '" subtitle="' . esc_attr($settings['form_subtitle']) . '"]');
+        echo do_shortcode('[syonet_form id="' . esc_attr($settings['form_id']) . '" logo="' . esc_attr($settings['logo']['url']) . '" title="' . esc_attr($settings['form_title']) . '" submit_text="' . esc_attr($settings['form_submit_text']) . '" subtitle="' . esc_attr($settings['form_subtitle']) . '" veiculo="'.esc_attr($veiculo) .' "]');
         
     }
 }
