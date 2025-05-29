@@ -1,5 +1,5 @@
 <?php
-
+// = die();
 if (! defined('ABSPATH')) exit;
 
 // SHORTCODE ATTRIBUTES
@@ -35,7 +35,7 @@ $empresas = array_map(function ($empresa) {
     ];
 }, $empresas);
 
-if ($veiculos == '') {
+if (is_string($veiculos) && trim($veiculos) === '') {
 
     $veiculos = [
 
@@ -196,12 +196,12 @@ if (is_array($veiculos)) {
         'placeholder' => 'Escolher opção'
     ]];
 } else {
+
     $veiculos = [
         'model' => [
-            'label' => 'Modelo de moto',
             'required' => false,
             'type' => 'hidden',
-            'value' => $veiculos
+            'value' => trim($veiculos),
         ],
 
     ];
@@ -301,7 +301,7 @@ $steps =  [
                         <?php endif; ?>
 
                         <?php if ($details['type'] == 'hidden'): ?>
-                            <input type="hidden" name="<?php echo $field; ?>" id="<?php echo $field; ?>" <?php echo $details['required'] ? 'required' : ''; ?> placeholder="<?php echo $details['label']; ?>">
+                            <input type="hidden" name="<?php echo $field; ?>" id="<?php echo $field; ?>" <?php echo $details['required'] ? 'required' : ''; ?> <?php echo 'value="' . $details['value'] .'"' ?>>
                         <?php endif; ?>
                         <?php if ($details['type'] != 'hidden'): ?>
                             <div class="form-control-syonet">
@@ -348,7 +348,7 @@ $steps =  [
 
                                         <?php if ($details['placeholder']): ?>
                                             <option value="">
-                                                Escolha uma opção
+                                                Selecionar opção
                                             </option>
                                         <?php endif; ?>
                                         <?php foreach ($details['options'] as $option): ?>
