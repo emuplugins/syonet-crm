@@ -46,6 +46,8 @@ $empresas = array_map(function ($empresa) {
     ];
 }, $empresas);
 
+if(!$veiculos){
+
 $veiculos = [
 
     'CG 160 START' => [
@@ -194,7 +196,7 @@ $veiculos = [
         'name'  => 'GL 1800 GOLDWING'
     ]
 ];
-
+}
 
 $steps =  [
 
@@ -320,6 +322,7 @@ $steps =  [
             'options' => $empresas,
             'placeholder' => 'Escolher opção'
         ],
+        if(is_array($veiculos)){
         'model' => [
             'label' => 'Escolha sua moto',
             'required' => true,
@@ -327,6 +330,15 @@ $steps =  [
             'options' => $veiculos,
             'placeholder' => 'Escolher opção'
         ],
+        }else{
+        'model' => [
+                    'label' => 'Modelo de moto',
+                    'required' => false,
+                    'type' => 'hidden',
+                    'value' => $veiculos
+                ],
+        
+        }
         //         'contact_preference' => [
         //             'label' => 'Preferência de contato',
         //             'required' => true,
