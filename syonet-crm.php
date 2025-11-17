@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Syonet CRM
  * Description: Integração com sistema Syonet CRM.
- * Version: 1.0.21
+ * Version: 1.0.22
  * Author: Tonny Santana
  */
 
