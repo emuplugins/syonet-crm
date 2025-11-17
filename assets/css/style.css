@@ -322,5 +322,9 @@ body.elementor-editor-active .steps-container .first-step, body.elementor-editor
         font-weight: 700;
         font-size: 20px;
     }
+
+    .form-wizard .controls {
+        flex-direction:column
+    }
 }
 
